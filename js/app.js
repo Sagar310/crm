@@ -8,6 +8,5 @@ app.config(function($routeProvider) {
         cache: false        
 
     })
-
     .otherwise({ redirectTo: '/' });                    
 });  
