@@ -57,63 +57,17 @@
         $npass = fetchData($request,"npass");
         if($email == NULL || $cpass == NULL || $npass == NULL)
         {
-            return RANS();
+            $msg = RANS();
         }
         else
         {
             $obj = new User();
-            $cpass = $obj->encrypt($cpass);
-            $npass = $obj->encrypt($npass);
-            $where = sprintf(" email='%s' ",$email);
-            $msg = $obj->getUser("*",$where,"","");
-            $result=json_decode($msg,TRUE);
-            $error = $result['error'] == true ? 1 : 0 ;
-            if($error == 1)
-            {
-                $msgArr["error"] = TRUE;
-                $msgArr["msg"] = $result['msg'];
-                $msg = json_encode($msgArr);
-            }
-            else
-            {
-                $dbrow= json_decode($result["data"],TRUE);
-                print_r($dbrow);
-                $dbpass = $dbrow[0]["pass"];
-                $resetQ = $dbrow[0]["resetQ"];
-                $resetAns = $dbrow[0]["resetAns"];
-                
-                //echo "<br>".$dbpass."<br>";
-                if($cpass == $dbpass)
-                {
-                    $obj->email = $email;
-                    $obj->pass = $npass;
-                    $obj->resetQ = addslashes($resetQ);
-                    $obj->resetAns = addslashes($resetAns);
-                    $msg = $obj->saveUser();
-                    $result=json_decode($msg,TRUE);
-                    $error = $result['error'] == true ? 1 : 0 ;
-                    if($error == 1)
-                    {
-                        $msgArr["error"] = TRUE;
-                        $msgArr["msg"] = $result['msg'];
-                        $msg = json_encode($msgArr);
-                    }
-                    else
-                    {
-                        $msgArr["error"] = FALSE;
-                        $msgArr["msg"] = "Password changed.";
-                        $msg = json_encode($msgArr);                
-                    }  
-                }
-                else
-                {
-                    $msgArr["error"]=TRUE;
-                    $msgArr["msg"]= "Invalid credentials";
-                    $msg = json_encode($msgArr);
-                }                              
-            }    
-            return $msg;       
+            $obj->email = $email;
+            $obj->cpass = $cpass;
+            $obj->npass = $npass;
+            $msg = $obj->changePassword();
         }
+        rturn 
     }
 
     function userLogin($request)
@@ -121,47 +75,17 @@
         $email = fetchData($request,"email");
         $pass = fetchData($request,"pass");
         if($email == NULL || $pass == NULL)
-            return RANS();
-            
-        $obj = new User();
-        $pass = $obj->encrypt($pass);
-        $where = sprintf(" email='%s'",$email);
-        $msg = $obj->getUser("pass",$where,"","");        
-        $result=json_decode($msg,TRUE);
-        $error = $result['error'] == true ? 1 : 0 ;
-        if($error == 1)
+            $msg = RANS();
+        else  
         {
-            $msgArr["error"] = TRUE;
-            $msgArr["msg"] = $result['msg'];
+            $obj = new User();
+            $obj->email = $email;
+            $obj->pass = $pass;
+            $msg = $obj->userLogin();
         }
-        else
-        {
-            
-            $dbpass= json_decode($result["data"],TRUE);
-            $dbpass = $dbpass[0]["pass"];
-            if($pass == $dbpass)
-            {
-                $msgArr["error"] = FALSE;
-                $msgArr["msg"] = "Login successful.";
-                session_start();
-                $_SESSION["lguser"] = $email;
-            }
-            else
-            {
-                $msgArr["error"]=TRUE;
-                $msgArr["msg"]= "Invalid credentials";
-            }
-        }
-        $msg = json_encode($msgArr);
         return $msg;
-
-
     }
 
-    function changePas($request)
-    {
-
-    }
 
     function deleteUser($request)
     {
