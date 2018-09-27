@@ -16,7 +16,7 @@
 
         public function __set($property,$value)
         {
-            if($property=="userid"||$property=="email"||$property=="pass"||$property=="resetQ"||$property=="resetAns")
+            if($property=="userid"||$property=="email"||$property=="pass"||$property=="cpass"||$property=="npass"||$property=="resetQ"||$property=="resetAns")
                 $this->data[$property]=$value;
         }
         
@@ -46,12 +46,157 @@
             return $encstr;
         }
 
-        function generatePassword() {
+        public function generatePassword()
+        {
             $length = 10;
             $chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%^&*()_-=+;:,.?";
             $password = substr( str_shuffle( $chars ), 0, $length );
             return $password;
-        }        
+        }   
+        
+        public function userLogin()
+        {
+            $query = sprintf("SELECT pass FROM %s WHERE email='%s'",$this->table,$this->email);
+            try
+            {
+                $config = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
+                $con = new PDO("mysql:host=".$this->dbArr['dbserver'].";dbname=".$this->dbArr['dbname']."", $this->dbArr['dbuser'], $this->dbArr['dbpass'], $config);	
+                $stmt=$con->prepare($query);
+                $stmt->execute();
+                
+                if($stmt->rowCount()>0)
+                {
+                    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $dbpass = $result[0]["pass"];
+                    $this->pass = $this->encrypt($this->pass);
+                    if($dbpass==$this->pass)
+                    {
+                        $msg = generateResponse(FALSE,$this->messages["logins"],FALSE);
+                    } 
+                    else
+                    {
+                        $msg=generateResponse(TRUE,$this->messages["loginerr"],FALSE);
+                    }                    
+                    return $msg;                
+                }
+                else
+                {
+                    $msg=$this->generateResponse(TRUE,$this->messages["error"],FALSE);
+                    return $msg;                                
+                }
+            }
+            catch(PDOException $e){
+                $msg=$this->generateResponse(TRUE,$e->getMessage(),FALSE);
+                return $msg;                 
+            }
+        }
+
+        public function getResetQ()
+        {
+            $query = sprintf("SELECT resetQ FROM %s WHERE email='%s'",$this->table,$this->email);
+            try
+            {
+                $config=array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
+                $con=new PDO("mysql:host=".$this->dbArr['dbserver'].";dbname=".$this->dbArr['dbname']."", $this->dbArr['dbuser'], $this->dbArr['dbpass'], $config);	
+                $stmt=$con->prepare($query);
+                $stmt->execute();                
+                if($stmt->rowCount()>0)
+                {
+                    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);                   
+                    $msg = generateResponse(FALSE,json_encode($result),TRUE);                                    
+                }                
+            }
+            catch(PDOException $e){
+                $msg=$this->generateResponse(TRUE,$e->getMessage(),FALSE);
+                return $msg;                 
+            }
+        }
+
+        public function getResetQ()
+        {
+            $query = sprintf("SELECT resetAns FROM %s WHERE email='%s'",$this->table,$this->email);
+            try
+            {
+                $config=array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
+                $con=new PDO("mysql:host=".$this->dbArr['dbserver'].";dbname=".$this->dbArr['dbname']."", $this->dbArr['dbuser'], $this->dbArr['dbpass'], $config);	
+                $stmt=$con->prepare($query);
+                $stmt->execute();                
+                if($stmt->rowCount()>0)
+                {
+                    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);   
+                    $dbresultAns=$result[0]["resultAns"];
+                    if($this->resetAns==$dbresultAns)
+                    {
+                        $this->pass=$this->generatePassword();
+                        $query=sprintf("UPDATE %s SET pass='%s' WHERE email='%s'",$this->table,$this->pass,$this->email);
+                        $stmt=$con->prepare($query);
+                        $stmt->execute();
+                        if($stmt->rowCount()>0)
+                        {
+                            $data['pass']=$this->pass;
+                            $msg=generateResponse(FALSE,json_encode($data),TRUE);
+                        }                        
+                    }        
+                    else
+                    {
+                        $msg = generateResponse(TRUE,$this->messages["reseterr"],TRUE); 
+                    }        
+                                                       
+                }                
+            }
+            catch(PDOException $e){
+                $msg=$this->generateResponse(TRUE,$e->getMessage(),FALSE);
+                return $msg;                 
+            }
+        }
+
+        public function changePassword()
+        {
+            $query = sprintf("SELECT pass FROM %s WHERE email='%s'",$this->table,$this->email);
+            try
+            {
+                $config = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
+                $con = new PDO("mysql:host=".$this->dbArr['dbserver'].";dbname=".$this->dbArr['dbname']."", $this->dbArr['dbuser'], $this->dbArr['dbpass'], $config);	
+                $stmt=$con->prepare($query);
+                $stmt->execute();
+                
+                if($stmt->rowCount()>0)
+                {
+                    $result=$stmt->fetchAll(PDO::FETCH_ASSOC);
+                    $dbpass = $result[0]["pass"];
+                    $this->cpass = $this->encrypt($this->cpass);
+                    $this->npass = $this->encrypt($this->npass);
+                    if($dbpass==$this->cpass)
+                    {
+                        $query = sprintf("UPDATE %s SET pass = '%s' WHERE email='%s'",$this->table,$this->npass,$this->email);
+                        $stmt=$con->prepare($query);
+                        $stmt->execute();
+                        if($stmt->rowCount()>0)
+                        {
+                            $msg=generateResponse(FALSE,$this->messages["cp"],FALSE);
+                        }
+                        else
+                        {
+                            $msg=generateResponse(TRUE,$stmt->errorInfo()[2],FALSE);
+                        }
+                    } 
+                    else
+                    {
+                        $msg=generateResponse(TRUE,$this->messages["loginerr"],FALSE);
+                    }                    
+                    return $msg;                
+                }
+                else
+                {
+                    $msg=$this->generateResponse(TRUE,$this->messages["error"],FALSE);
+                    return $msg;                                
+                }
+            }
+            catch(PDOException $e){
+                $msg=$this->generateResponse(TRUE,$e->getMessage(),FALSE);
+                return $msg;                 
+            }
+        }
 
         public function getUser($field_list="*",$where = "", $order = "", $limit="")
         {
