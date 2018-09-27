@@ -67,7 +67,7 @@
             $obj->npass = $npass;
             $msg = $obj->changePassword();
         }
-        rturn 
+        return $msg;
     }
 
     function userLogin($request)
