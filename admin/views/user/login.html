@@ -1,0 +1,45 @@
+
+<div class="panel panel-default">
+    <div class="panel-heading"><i class="fa fa-lock"></i> Login</div>
+    <div class="panel-body">
+        <form name="loginForm">
+            <div class="form-group">
+                <label class="control-label">
+                    Email:
+                </label>   
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-envelope"></i></div>
+                    <input type="email" name="usrname" ng-model="ulc.userLg.email" ng-minlength="5" ng-maxlength="20" required class="form-control" placeholder="Email"/>   
+                </div>
+                <div ng-messages="loginForm.usrname.$touched && loginForm.usrname.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                    <div ng-message="required"><small>Email is mandatory.</small></div>
+                    <!--div ng-message-default>This field has an input error</div-->
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label">
+                    Password:
+                </label>   
+                <div class="input-group">
+                    <div class="input-group-addon"><i class="fa fa-key"></i></div>
+                    <input type="password" name="usrpass" ng-model="ulc.userLg.pass" ng-minlength="5" ng-maxlength="20" required class="form-control" placeholder="Password"/>   
+                </div>
+                <div ng-messages="loginForm.usrpass.$touched && loginForm.usrpass.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                    <div ng-message="required"><small>Password is mandatory.</small></div>
+                    <div ng-message="minlength">Your field is too short</div>
+                    <div ng-message="maxlength">Your field is too long</div>
+                    <!--div ng-message-default>This field has an input error</div-->
+                </div>
+            </div>           
+            <div class="form-group">
+                <div class="col-lg-offset-8 col-lg-4">
+                    <button class="btn btn-primary" ng-show="loginForm.$valid" ng-click="ulc.userLogin();">Login</button>
+                </div>
+
+            </div>
+        </form>
+    </div>
+</div>
+
+      
+      

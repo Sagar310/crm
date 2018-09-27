@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+   <head>
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <title>CRM Admin Panel</title>
+      <!-- Favicon and touch icons -->
+      <link rel="shortcut icon" href="admin/assets/dist/img/ico/favicon.png" type="image/x-icon">
+      <!-- Start Global Mandatory Style
+         =====================================================================-->
+      <!-- jquery-ui css -->
+     
+      <!-- Bootstrap -->
+      <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+ 
+      <link href="admin/assets/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css"/>
+    
+      <!-- End Global Mandatory Style
+         =====================================================================-->
+      <!-- Start page Label Plugins 
+         =====================================================================-->
+      <!-- Emojionearea -->
+      
+      <!-- Monthly css -->
+      
+      <!-- End page Label Plugins 
+         =====================================================================-->
+      <!-- Start Theme Layout Style
+         =====================================================================-->
+      <!-- Theme style -->
+      
+      <!-- Theme style rtl -->
+      <!--<link href="assets/dist/css/stylecrm-rtl.css" rel="stylesheet" type="text/css"/>-->
+      <!-- End Theme Layout Style
+         =====================================================================-->
+   </head>
+   <body class="hold-transition sidebar-mini" ng-app="lgApp" style="background:#fff !important;">
+
+      <!-- Site wrapper -->
+      <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-lg-offset-4" >
+                <div ng-view style="margin:150px 0px 0px 0px;"></div>
+            </div>
+        </div>
+        
+        
+    
+      </div>
+      <!-- /.wrapper -->
+      <!-- Start Core Plugins
+         =====================================================================-->
+      <!-- jQuery -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular.min.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.4.8/angular-route.js"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/angular-messages/1.4.8/angular-messages.min.js"></script>
+      <!-- jquery-ui --> 
+      <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+      <!-- Bootstrap -->
+      <script src="admin/assets/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+      <script src="js/app.js"></script>
+      <script src="admin/controllers/dataService.js"></script>
+      <script src="admin/controllers/User/userController.js"></script>
+      
+      <!-- lobipanel -->
+      
+      <!-- End Core Plugins
+         =====================================================================-->
+      <!-- Start Page Lavel Plugins
+         =====================================================================-->
+      <!-- ChartJs JavaScript -->
+
+      <!-- End Theme label Script
+         =====================================================================-->
+        <!--script>
+        var app = angular.module("lgApp", ["ngRoute","ngMessages"]);
+        app.config(function($routeProvider) {
+            $routeProvider
+            .when("/", {
+                templateUrl : "admin/views/user/login.html",
+                controller: "userLoginController", 
+                controllerAs: "ulc",
+                cache: false
+            })
+  
+            .otherwise({ redirectTo: '/' });                    
+        });                          
+        </script-->
+    </body>
+</html>
+
