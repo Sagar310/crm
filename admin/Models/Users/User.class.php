@@ -112,7 +112,7 @@
             }
         }
 
-        public function getResetQ()
+        public function getResetPassword()
         {
             $query = sprintf("SELECT resetAns FROM %s WHERE email='%s'",$this->table,$this->email);
             try
