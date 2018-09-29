@@ -128,8 +128,7 @@
         $mmsgArr = array();
         $userid = fetchData($request,"userid");
 
-
-        if($bldg_id == NULL)
+        if($userid == NULL)
         {
             RANS();          
         }

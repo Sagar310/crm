@@ -13,8 +13,11 @@
     
     switch($action)
     {
-            case "getCustomer":
-                $msg=getCustomer($request);
+            case "getAllCustomers":
+                $msg=getAllCustomers($request);
+                break;
+            case "getCustomerById":
+                $msg=getCustomerById($request);
                 break;
             case "newCustomer":
                 $msg=newCustomer($request);
@@ -31,6 +34,7 @@
     }
     
     echo $msg;
+
     function RANS()
     {
         $msgArr["error"]=TRUE;
@@ -45,135 +49,121 @@
                 return NULL;   
     }
 
-    function changePass($request)
-    {
-        $email = fetchData($request,"email");
-        $cpass = fetchData($request,"cpass");
-        $npass = fetchData($request,"npass");
-        if($email == NULL || $cpass == NULL || $npass == NULL)
-        {
-            $msg = RANS();
-        }
-        else
-        {
-            $obj = new User();
-            $obj->email = $email;
-            $obj->cpass = $cpass;
-            $obj->npass = $npass;
-            $msg = $obj->changePassword();
-        }
-        return $msg;
-    }
-
-    function userLogin($request)
-    {
-        $email = fetchData($request,"email");
-        $pass = fetchData($request,"pass");
-        if($email == NULL || $pass == NULL)
-            $msg = RANS();
-        else  
-        {
-            $obj = new User();
-            $obj->email = $email;
-            $obj->pass = $pass;
-            $msg = $obj->userLogin();
-        }
-        return $msg;
-    }
-
-
-    function deleteUser($request)
+    function deleteCustomer($request)
     {
         $msg = "";
         $mmsgArr = array();
-        $userid = fetchData($request,"userid");
+        $custid = fetchData($request,"custid");
 
-
-        if($bldg_id == NULL)
+        if($custid == NULL)
         {
             RANS();          
         }
         else
         {
-            $obj = new User();   
-            $obj->userid = $userid;               
-            $msg = $obj->deleteUser();
-        }
-        return $msg;        
-    }    
-
-    function updateUser($request)
-    {
-        $msg = "";        
-        $userid =  fetchData($request,"userid");
-        $email = fetchData($request,"email");
-        $pass = fetchData($request,"pass");
-        $resetQ = fetchData($request,"resetQ");
-        $resetAns = fetchData($request,"resetAns");
-        
-
-        if($userid == NULL || $email == NULL || $pass == NULL || $resetQ == NULL || $resetAns == NULL)
-        { 
-            return RANS();         
-        }
-        else
-        {
-            $obj = new User();   
-            $obj->userid = $userid;
-            $obj->email = $email;         
-            $obj->pass = $pass;         
-            $obj->resetQ = $resetQ;         
-            $obj->resetAns = $resetAns;               
-            $msg = $obj->saveUser();
+            $obj = new Customer();   
+            $obj->custid = $custid;               
+            $msg = $obj->deleteCustomer();
         }
         return $msg;        
     }
-        
-    function getUserById($request)
+    
+    function newCustomer($request)
     {
         $msg="";
-        $msgArr = array();
-        $userid = fetchData($request,"userid");
-        if($userid==NULL)
-        {
-            RANS();         
-        }
-        else
-        {
-            $obj = new Member();            
-            $msg = $obj->getUser("*","userid=".$userid,"","");
-        }
-        return $msg;
-
-    }
-
-    function newUser($request){
-
-        $msg="";
+        $lastName = fetchData($request,"lastName");
+        $firstName = fetchData($request,"firstName");
+        $gender = fetchData($request,"gender");
+        $cellNo = fetchData($request,"cellNo");
         $email = fetchData($request,"email");
-        $pass = fetchData($request,"pass");
-        $resetQ = fetchData($request,"resetQ");
-        $resetAns = fetchData($request,"resetAnd");
+        $birthDate = fetchData($request,"birthDate");
+        $wedAniv = fetchData($request,"wedAniv");
+        $disPic = fetchData($request,"disPic");
+        $createdBy = fetchData($request,"createdBy");
+        $modifiedBy = fetchData($request,"modifiedBy");
         
-        if($email == NULL || $pass  == NULL || $resetQ  == NULL || $resetAns  == NULL)
+        if($lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $wedAniv  == NULL || $disPic  == NULL || $createdBy  == NULL || $modifiedBy  == NULL)
         {
             RANS();
         }
         else
         {
-            $obj=new User();
+            $obj=new Customer();
+            $obj->lastName =  $lastName;
+            $obj->firstName =  $firstName;
+            $obj->gender =  $gender;
+            $obj->cellNo =  $cellNo;
             $obj->email =  $email;
-            $obj->pass =  $pass;
-            $obj->resetQ =  $resetAns;
-            $msg=$obj->newUser();
+            $obj->birthDate =  $birthDate;
+            $obj->wedAniv =  $wedAniv;
+            $obj->disPic =  $disPic;
+            $obj->createdBy =  $createdBy;
+            $obj->modifiedBy =  $modifiedBy;
+            $msg=$obj->newCustomer();
+        }
+        return $msg;
+    }    
+
+    function saveCustomer($request)
+    {
+        $msg="";
+        $custid = fetchData($request,"custid");
+        $lastName = fetchData($request,"lastName");
+        $firstName = fetchData($request,"firstName");
+        $gender = fetchData($request,"gender");
+        $cellNo = fetchData($request,"cellNo");
+        $email = fetchData($request,"email");
+        $birthDate = fetchData($request,"birthDate");
+        $wedAniv = fetchData($request,"wedAniv");
+        $disPic = fetchData($request,"disPic");
+        $createdBy = fetchData($request,"createdBy");
+        $modifiedBy = fetchData($request,"modifiedBy");
+        
+        if($custid == NULL || $lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $wedAniv  == NULL || $disPic  == NULL || $createdBy  == NULL || $modifiedBy  == NULL)
+        {
+            RANS();
+        }
+        else
+        {
+            $obj=new Customer();
+            $obj->custid =  $custid;
+            $obj->lastName =  $lastName;
+            $obj->firstName =  $firstName;
+            $obj->gender =  $gender;
+            $obj->cellNo =  $cellNo;
+            $obj->email =  $email;
+            $obj->birthDate =  $birthDate;
+            $obj->wedAniv =  $wedAniv;
+            $obj->disPic =  $disPic;
+            $obj->createdBy =  $createdBy;
+            $obj->modifiedBy =  $modifiedBy;
+            $msg=$obj->saveCustomer();
         }
         return $msg;
     }
-
-    function getAllUsers()
+        
+    function getCustomerById($request)
     {
-        $obj = new User();
-        $msg = $obj->getUser("*","","","");
+        $msg="";
+        $msgArr = array();
+        $custid = fetchData($request,"custid");
+        if($custid==NULL)
+        {
+            RANS();         
+        }
+        else
+        {
+            $obj = new Customer();            
+            $msg = $obj->getCustomer("*","custid=".$custid,"","");
+        }
+        return $msg;
+
+    }
+
+    function getAllCustomers()
+    {
+        $obj = new Customer();
+        $msg = $obj->getCustomer("*","","","");
         return $msg;    
     }
 
