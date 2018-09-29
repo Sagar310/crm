@@ -8,5 +8,11 @@ app.config(function($routeProvider) {
         cache: false        
 
     })
+    .when("/forgotpass",{
+        templateUrl : "admin/views/user/forgotpass.html",
+        controller: "forgotPassController", 
+        controllerAs: "fpc",
+        cache: false         
+    })
     .otherwise({ redirectTo: '/' });                    
 });  

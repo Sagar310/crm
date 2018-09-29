@@ -1,3 +1,8 @@
+<?php
+    session_start();
+    if(isset($_SESSION["lguser"]))
+    {
+?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
@@ -1244,4 +1249,10 @@
       </script>
    </body>
 </html>
-
+<?php
+    }
+    else
+    {
+        header('Location: se.html');
+    }
+?>
