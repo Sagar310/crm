@@ -9,30 +9,25 @@
     $action=null;
     if(isset($request["action"]))
         $action=$request["action"];
-    $msg="";
-   
+    $msg="";   
     
     switch($action)
     {
-            case "newUser":
-                $msg=newUser($request);
+            case "getCustomer":
+                $msg=getCustomer($request);
                 break;
-            case "userLogin":
-                $msg=userLogin($request);
+            case "newCustomer":
+                $msg=newCustomer($request);
                 break;
-            case "changePass":
-                $msg=changePass($request);
+            case "saveCustomer":
+                $msg=saveCustomer($request);
                 break;
-            case "getResetQ":
-                $msg=getAllUsers($request);
-                break;              
-            case "resetPass":
-                $msg=getUserById($request);
-                break;    
+            case "deleteCustomer":
+                $msg=deleteCustomer($request);
+                break;                              
             default :
                 $msg="Invalid action.";
                 break;                   
-
     }
     
     echo $msg;
