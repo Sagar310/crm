@@ -2,6 +2,18 @@
          <!-- =============================================== -->
          <!-- Content Wrapper. Contains page content -->
          <div class="content-wrapper">
+                <!-- Content Header (Page header) -->
+                <section class="content-header">
+                   <div class="header-icon">
+                      <i class="fa fa-users"></i>
+                   </div>
+                   <div class="header-title">
+                      <h1>Add Customer</h1>
+                      <small><a href="#/">Home</a> | Add Customer</small>
+                   </div>
+                </section>
+        </div>
+         <div class="content-wrapper">
             <!-- Content Header (Page header) -->
             <section class="content-header">
                <div class="header-icon">
@@ -12,6 +24,40 @@
                   <small>Customer list</small>
                </div>
             </section>
+            <section class="content">
+                    <div class="row">
+                       <!-- Form controls -->
+                       <div class="col-sm-12">
+                          <div class="panel panel-bd lobidrag">
+                             <div class="panel-heading">
+                                <div class="btn-group" id="buttonlist"> 
+                                   <a class="btn btn-add " href="clist.html"> 
+                                   <i class="fa fa-list"></i>  Customer List </a>  
+                                </div>
+                             </div>       
+                             <div class="panel-body">
+                                 <form name="newCustForm">
+                                     <div class="row">
+                                         <div class = col-sm-6>
+                                             <div class="form-group">
+                                                 <label class="control-label"> Last Name</label>
+                                                 <input type="text" name = "lastName" class="form-control" placeholder="Enter Last Name" required>
+                                                 <div ng-messages="newCustForm.lastName.$touched && newCustForm.lastName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                        <div ng-message="required"><small>Email is mandatory.</small></div>                                                        
+                                                </div>
+                                             </div>
+                                         </div>
+                                         <div class="form-group">
+                                                <label class="control-label"> First Name</label>
+                                                <input type="text" name = "firstName" class="form-control" placeholder="Enter First Name" required>
+                                                <div ng-messages="newCustForm.firstName.$touched && newCustForm.firstName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                       <div ng-message="required"><small>Email is mandatory.</small></div>                                                        
+                                               </div>
+                                            </div>
+                                        </div>                                         
+                                     </div>
+                                 </form>
+                             </div>     
             <!-- Main content -->
             <section class="content">
                <div class="row">
