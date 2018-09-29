@@ -71,11 +71,13 @@
                     $this->pass = $this->encrypt($this->pass);
                     if($dbpass==$this->pass)
                     {
-                        $msg = generateResponse(FALSE,$this->messages["logins"],FALSE);
+                        sessison_start();
+                        $_SESSION["lguser"] = $this->email;
+                        $msg = $this->generateResponse(FALSE,$this->messages["logins"],FALSE);
                     } 
                     else
                     {
-                        $msg=generateResponse(TRUE,$this->messages["loginerr"],FALSE);
+                        $msg = $this->generateResponse(TRUE,$this->messages["loginerr"],FALSE);
                     }                    
                     return $msg;                
                 }
@@ -94,6 +96,7 @@
         public function getResetQ()
         {
             $query = sprintf("SELECT resetQ FROM %s WHERE email='%s'",$this->table,$this->email);
+            //return $query;
             try
             {
                 $config=array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
@@ -103,7 +106,8 @@
                 if($stmt->rowCount()>0)
                 {
                     $result=$stmt->fetchAll(PDO::FETCH_ASSOC);                   
-                    $msg = generateResponse(FALSE,json_encode($result),TRUE);                                    
+                    $msg = $this->generateResponse(FALSE,json_encode($result),TRUE);       
+                    return $msg;                             
                 }                
             }
             catch(PDOException $e){
@@ -112,7 +116,7 @@
             }
         }
 
-        public function getResetPassword()
+        public function resetPassword()
         {
             $query = sprintf("SELECT resetAns FROM %s WHERE email='%s'",$this->table,$this->email);
             try
@@ -124,24 +128,25 @@
                 if($stmt->rowCount()>0)
                 {
                     $result=$stmt->fetchAll(PDO::FETCH_ASSOC);   
-                    $dbresultAns=$result[0]["resultAns"];
+                    $dbresultAns=$result[0]["resetAns"];
                     if($this->resetAns==$dbresultAns)
                     {
                         $this->pass=$this->generatePassword();
-                        $query=sprintf("UPDATE %s SET pass='%s' WHERE email='%s'",$this->table,$this->pass,$this->email);
+                        $query=sprintf("UPDATE %s SET pass='%s' WHERE email='%s'",$this->table,$this->encrypt($this->pass),$this->email);
                         $stmt=$con->prepare($query);
                         $stmt->execute();
                         if($stmt->rowCount()>0)
                         {
                             $data['pass']=$this->pass;
-                            $msg=generateResponse(FALSE,json_encode($data),TRUE);
+                            $msg=$this->generateResponse(FALSE,json_encode($data),TRUE);
                         }                        
                     }        
                     else
                     {
-                        $msg = generateResponse(TRUE,$this->messages["reseterr"],TRUE); 
+                        $msg = $this->generateResponse(TRUE,$this->messages["reseterr"],TRUE); 
                     }        
-                                                       
+                    
+                    return $msg;
                 }                
             }
             catch(PDOException $e){

@@ -24,10 +24,10 @@
                 $msg=changePass($request);
                 break;
             case "getResetQ":
-                $msg=getAllUsers($request);
+                $msg=getResetQ($request);
                 break;              
-            case "resetPass":
-                $msg=getUserById($request);
+            case "resetPassword":
+                $msg=resetPassword($request);
                 break;    
             default :
                 $msg="Invalid action.";
@@ -48,6 +48,41 @@
                 return $request[$var];
             else
                 return NULL;   
+    }
+
+    function resetPassword($request)
+    {
+        $email = fetchData($request,"email");
+        $resetAns = fetchData($request,"resetAns");
+
+        if($email == NULL || $resetAns == NULL)
+        {
+            $msg = RANS();
+        }
+        else
+        {
+            $obj = new User();
+            $obj->email = $email;
+            $obj->resetAns = $resetAns;
+            $msg = $obj->resetPassword();
+        }
+        return $msg;
+    }
+
+    function getResetQ($request)
+    {
+        $email = fetchData($request,"email");
+        if($email == NULL)
+        {
+            $msg = RANS();
+        }
+        else
+        {
+            $obj = new User();
+            $obj->email = $email;
+            $msg = $obj->getResetQ();
+        }
+        return $msg;
     }
 
     function changePass($request)
