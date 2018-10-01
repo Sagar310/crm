@@ -172,7 +172,7 @@
 
     function getDisplayPic()
     {
-        $dir = "../assets/images/customers";
+        $dir = "../../assets/images/customers/";
         $files = scandir($dir);  
         $msg = json_encode($files);
         return $msg;  
