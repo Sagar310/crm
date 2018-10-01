@@ -174,10 +174,10 @@
     {
         $dir = "../../assets/images/customers/";
         $files = glob($dir."*.jpg");
-        foreach($val in $files) 
+        for($i=0;$i<count($files);$i++) 
         {
-            $arr = explode("/",$val);            
-            $val = $arr(count($arr)-1);
+            $arr = explode("/",$files[$i]);            
+            $files[i] = $arr(count($arr)-1);
         } 
         $msg = json_encode($files);
         return $msg;  
