@@ -170,7 +170,7 @@
         return $msg;    
     }
 
-    function getAllCustomers()
+    function getDisplayPic()
     {
         $dir = "../assets/images/customers";
         $files = scandir($dir);  
