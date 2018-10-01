@@ -14,7 +14,7 @@
     switch($action)
     {
             case "getAllCustomers":
-                $msg=getAllCustomers($request);
+                $msg=getAllCustomers();
                 break;
             case "getCustomerById":
                 $msg=getCustomerById($request);
@@ -27,7 +27,10 @@
                 break;
             case "deleteCustomer":
                 $msg=deleteCustomer($request);
-                break;                              
+                break;
+            case "getDisplayPic":
+                $msg=getDisplayPic();
+                break;                                              
             default :
                 $msg="Invalid action.";
                 break;                   
@@ -165,6 +168,14 @@
         $obj = new Customer();
         $msg = $obj->getCustomer("*","","","");
         return $msg;    
+    }
+
+    function getDisplayPic()
+    {
+        $dir = "../assets/images/customers";
+        $files = scandir($dir);  
+        $msg = json_encode($files);
+        return $msg;  
     }
 
  
