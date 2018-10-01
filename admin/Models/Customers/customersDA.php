@@ -173,7 +173,12 @@
     function getDisplayPic()
     {
         $dir = "../../assets/images/customers/";
-        $files = glob($dir."*.jpg");  
+        $files = glob($dir."*.jpg");
+        foreach($val in $files) 
+        {
+            $arr = explode("/",$val);            
+            $val = $arr(count($arr)-1);
+        } 
         $msg = json_encode($files);
         return $msg;  
     }
