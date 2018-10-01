@@ -176,8 +176,9 @@
         $files = glob($dir."*.jpg");
         for($i=0;$i<count($files);$i++) 
         {
-            $arr = explode("/",$files[$i]);            
-            $files[$i] = $arr(count($arr)-1);
+            $arr = explode("/",$files[$i]);  
+            $c = count($arr);          
+            $files[$i] = $arr($c-1);
         } 
         $msg = json_encode($files);
         return $msg;  
