@@ -11,6 +11,8 @@ app.controller("newCustController",function($scope,$http,dataService){
     ncc.newcust.wedAniv = "";
     ncc.newcust.disPic = "";
 
+    ncc.disPics = [];
+
     ncc.initDatePicker = function(){
         var date_input1=$('.dpic'); //our date input has the name "date"
         var container1=$('#newcustForm').length>0 ? $('#newcustForm').parent() : "body";
@@ -24,8 +26,26 @@ app.controller("newCustController",function($scope,$http,dataService){
 
     };
 
+    ncc.getDisPics = function(){
+        var data = {};
+        data.action="getDisplayPic";
+        var response = dataService.httpCall(data,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+             console.log(angular.toJson(result));
+
+            ncc.disPic = angular.fromJson(result.data);
+            //console.log(ncc.disPic)
+
+            
+        },
+        function(result){
+                alert(angular.toJson(result));
+        });          
+    };
+
     ncc.init = function(){
        ncc.initDatePicker();
+       ncc.getDisPics();
     };
 
     ncc.init();
