@@ -177,7 +177,7 @@
         for($i=0;$i<count($files);$i++) 
         {
             $arr = explode("/",$files[$i]);            
-            $files[i] = $arr(count($arr)-1);
+            $files[$i] = $arr(count($arr)-1);
         } 
         $msg = json_encode($files);
         return $msg;  
