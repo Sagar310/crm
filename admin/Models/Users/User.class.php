@@ -53,6 +53,22 @@
             $password = substr( str_shuffle( $chars ), 0, $length );
             return $password;
         }   
+
+        public function sync_enc($str)
+        {
+            $str == strrev($str);
+            $encstr = "";
+            for($i=0;$i < strlen($str); $i++)
+            {
+                $ch = dechex(ord(substr($str,$i,1)));
+                if(strlen($ch)==1)
+                {
+                    $ch = "0".$ch;
+                }
+                $encstr = $encstr . $ch;
+            }
+            return $encstr;
+        }
         
         public function userLogin()
         {
@@ -70,10 +86,13 @@
                     $dbpass = $result[0]["pass"];
                     $this->pass = $this->encrypt($this->pass);
                     if($dbpass==$this->pass)
-                    {
-                        sessison_start();
+                    {                        
+                        session_start();
                         $_SESSION["lguser"] = $this->email;
-                        $msg = $this->generateResponse(FALSE,$this->messages["logins"],FALSE);
+                        $msgArr["error"] = false;
+                        $msgArr["msg"] = $this->messages["logins"];
+                        $msgArr["data"] = $this->sync_enc($this->email);
+                        $msg = json_encode($msgArr);
                     } 
                     else
                     {

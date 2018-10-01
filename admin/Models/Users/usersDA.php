@@ -32,7 +32,6 @@
             default :
                 $msg="Invalid action.";
                 break;                   
-
     }
     
     echo $msg;

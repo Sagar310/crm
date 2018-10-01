@@ -1,148 +1,141 @@
-
-         <!-- =============================================== -->
-         <!-- Content Wrapper. Contains page content -->
-         <div class="content-wrapper">
-                <!-- Content Header (Page header) -->
-                <section class="content-header">
-                   <div class="header-icon">
-                      <i class="fa fa-users"></i>
-                   </div>
-                   <div class="header-title">
-                      <h1>Add Customer</h1>
-                      <small><a href="#/">Home</a> | Add Customer</small>
-                   </div>
-                </section>
+<section class="content-header">
+        <div class="header-icon">
+           <i class="fa fa-users"></i>
         </div>
-         <div class="content-wrapper">
-            <!-- Content Header (Page header) -->
-            <section class="content-header">
-               <div class="header-icon">
-                  <i class="fa fa-users"></i>
-               </div>
-               <div class="header-title">
-                  <h1>Add Customer</h1>
-                  <small>Customer list</small>
-               </div>
-            </section>
-            <section class="content">
-                    <div class="row">
-                       <!-- Form controls -->
-                       <div class="col-sm-12">
-                          <div class="panel panel-bd lobidrag">
-                             <div class="panel-heading">
-                                <div class="btn-group" id="buttonlist"> 
-                                   <a class="btn btn-add " href="clist.html"> 
-                                   <i class="fa fa-list"></i>  Customer List </a>  
-                                </div>
-                             </div>       
-                             <div class="panel-body">
-                                 <form name="newCustForm">
-                                     <div class="row">
-                                         <div class = col-sm-6>
-                                             <div class="form-group">
-                                                 <label class="control-label"> Last Name</label>
-                                                 <input type="text" name = "lastName" class="form-control" placeholder="Enter Last Name" required>
-                                                 <div ng-messages="newCustForm.lastName.$touched && newCustForm.lastName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
-                                                        <div ng-message="required"><small>Email is mandatory.</small></div>                                                        
-                                                </div>
-                                             </div>
-                                         </div>
-                                         <div class="form-group">
-                                                <label class="control-label"> First Name</label>
-                                                <input type="text" name = "firstName" class="form-control" placeholder="Enter First Name" required>
-                                                <div ng-messages="newCustForm.firstName.$touched && newCustForm.firstName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
-                                                       <div ng-message="required"><small>Email is mandatory.</small></div>                                                        
-                                               </div>
-                                            </div>
-                                        </div>                                         
-                                     </div>
-                                 </form>
-                             </div>     
-            <!-- Main content -->
-            <section class="content">
-               <div class="row">
-                  <!-- Form controls -->
-                  <div class="col-sm-12">
-                     <div class="panel panel-bd lobidrag">
-                        <div class="panel-heading">
-                           <div class="btn-group" id="buttonlist"> 
-                              <a class="btn btn-add " href="clist.html"> 
-                              <i class="fa fa-list"></i>  Customer List </a>  
-                           </div>
-                        </div>
+        <div class="header-title">
+           <h1>New Customer</h1>
+           <small><a href="#/">Dashboard</a> | New Customer</small>
+        </div>
+</section>
+<section class="content">
+        <div class="row">
+           <!-- Form controls -->
+           <div class="col-sm-12">
+                <div class="panel panel-primary">
+                        <div class="panel-heading">New Customer</div>
                         <div class="panel-body">
-                           <form class="col-sm-6">
-                              <div class="form-group">
-                                 <label>First Name</label>
-                                 <input type="text" class="form-control" placeholder="Enter First Name" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Last Name</label>
-                                 <input type="text" class="form-control" placeholder="Enter last Name" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Email</label>
-                                 <input type="email" class="form-control" placeholder="Enter Email" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Mobile</label>
-                                 <input type="number" class="form-control" placeholder="Enter Mobile" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Picture upload</label>
-                                 <input type="file" name="picture">
-                                 <input type="hidden" name="old_picture">
-                              </div>
-                              <div class="form-group">
-                                 <label>Bank details</label>
-                                 <input type="text" class="form-control" placeholder="Enter Bank details" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Passport</label>
-                                 <input type="text" class="form-control" placeholder="Enter Passport details" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Facebook Id</label>
-                                 <input type="text" class="form-control" placeholder="Enter Facebook details" required>
-                              </div>
-                              <div class="form-group">
-                                 <label>Date of Birth</label>
-                                 <input id='minMaxExample' type="text" class="form-control" placeholder="Enter Date...">
-                              </div>
-                              <div class="form-group">
-                                 <label>Address</label>
-                                 <textarea class="form-control" rows="3" required></textarea>
-                              </div>
-                              <div class="form-group">
-                                 <label>Customer type</label>
-                                 <select class="form-control">
-                                    <option>vendor</option>
-                                    <option>vip</option>
-                                    <option>regular</option>
-                                 </select>
-                              </div>
-                              <div class="form-group">
-                                 <label>Sex</label><br>
-                                 <label class="radio-inline"><input name="sex" value="1" checked="checked" type="radio">Male</label> 
-                                 <label class="radio-inline"><input name="sex" value="0" type="radio">Female</label>
-                              </div>
-                              <div class="form-check">
-                                 <label>Status</label><br>
-                                 <label class="radio-inline">
-                                 <input type="radio" name="status" value="1" checked="checked">Active</label>
-                                 <label class="radio-inline"><input type="radio" name="status" value="0" >Inctive</label>
-                              </div>
-                              <div class="reset-button">
-                                 <a href="#" class="btn btn-warning">Reset</a>
-                                 <a href="#" class="btn btn-success">Save</a>
-                              </div>
-                           </form>
+                            <form name="newCustForm" id="newCustForm">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-5">
+                                                <div class="form-group">
+                                                    <label class="control-label">Last name</label><br>
+                                                    <input type="text" name="lastName" ng-model="ncc.newcust.lastName" required placeholder="Enter Last name" class="form-control">                                            
+                                                    <div ng-messages="newCustForm.lastName.$touched && newCustForm.lastName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                        <div ng-message="required"><small>Last name is mandatory.</small></div>                                                           
+                                                    </div>                                                    
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-5 col-sm-offset-2">
+                                                    <div class="form-group">
+                                                        <label class="control-label">First name</label><br>
+                                                        <input type="text" name="firstName" ng-model="ncc.newcust.firstName" required placeholder="Enter First name" class="form-control">                                            
+                                                        <div ng-messages="newCustForm.firstName.$touched && newCustForm.firstName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                            <div ng-message="required"><small>Last name is mandatory.</small></div>                                                           
+                                                        </div>                                                         
+                                                    </div>
+                                            </div>
+                                        </div>                                    
+                                    </div>
+                                </div>
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Gender</label><br>
+                                                        <select ng-model="ncc.newcust.gender">
+                                                            <option value="NULL">Select gender</option>
+                                                            <option value="F">Female</option>
+                                                            <option value="M">Male</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5 col-sm-offset-2">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Cell Phone no.</label><br>
+                                                            <input type="text" name="cellNo" ng-model="ncc.newcust.cellNO" required pattern="^[6-9]\d{9}$" placeholder="Enter cell phone no." class="form-control">                                            
+                                                            <div ng-messages="newCustForm.cellNo.$touched && newCustForm.cellNo.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                                <div ng-message="required"><small>Cell phone no. is mandatory.</small></div>                                                           
+                                                                <div ng-message="pattern"><small>Cell phone no. is invalid.</small></div>      
+                                                            </div>                                                             
+                                                        </div>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+                                </div>                  
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                    <div class="form-group">
+                                                        <label class="control-label">Email</label><br>
+                                                        <input type="text" name="email" ng-model="ncc.newcust.email" required placeholder="Enter email address." class="form-control">                                            
+                                                        <div ng-messages="newCustForm.email.$touched && newCustForm.email.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                            <div ng-message="required"><small>Email address is mandatory.</small></div>                                                           
+                                                        </div>                                                           
+                                                    </div>
+                                                </div>
+                                                <div class="col-sm-5 col-sm-offset-2">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Date of Birth</label><br>
+                                                            <div class="input-group">
+                                                                <input type="text" name="birthdate" id="birthdate" ng-model="ncc.newcust.dob" required placeholder="Date of Birth" class="form-control dpic">                                            
+                                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                            <div ng-messages="newCustForm.birthdate.$touched && newCustForm.birthdate.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                                <div ng-message="required"><small>Date of birth is mandatory.</small></div>                                                           
+                                                            </div>                                                             
+                                                        </div>
+                                                </div>
+                                            </div>                                    
+                                        </div>
+                                </div>         
+                                <div class="row">
+                                        <div class="col-sm-12">
+                                            <div class="row">
+                                                <div class="col-sm-5">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Wedding Anniversary</label><br>
+                                                            <div class="input-group">
+                                                                <input type="text" name="wedAnniv" id="wedAnniv" ng-model="ncc.newcust.wedAniv"  placeholder="Date of Birth" class="form-control dpic">                                            
+                                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                         
+                                                        </div>
+                                                </div>
+                                                <div class="col-sm-5 col-sm-offset-2"">
+                                                        <div class="form-group">
+                                                            <label class="control-label">Display pic</label><br>
+                                                            <div class="input-group">
+                                                                <img ng-src="{{dpic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;" ng-click="selectDpic($index);">
+                                                            </div>                                                          
+                                                        </div>
+                                                    </div>                                                
+                                            </div>                                    
+                                        </div>
+                                </div>   
+                                <div class="row">
+                                    <div col="col-m-12">
+                                        
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                     </div>
-                  </div>
-               </div>
-            </section>
-            <!-- /.content -->
-         </div>
-         <!-- /.content-wrapper -->
-        
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-2 col-sm-offset-10">
+                                                 <button class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
+                                                 <a href="#/custlist" class="btn btn-default">Close</a>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+           </div>
+        </div>
+     </section>

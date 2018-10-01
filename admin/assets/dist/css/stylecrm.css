@@ -1847,8 +1847,8 @@ i.fa-dot-circle-o {
 }
 .panel-primary > .panel-heading {
     color: #fff;
-    background-color: #428bca;
-    border-color: #428bca;
+    background-color: #009688;
+    border-color: #009688;
 }
 .panel-success > .panel-heading {
     color: #fff;
@@ -1953,26 +1953,26 @@ i.fa-dot-circle-o {
 /*--- Buttons primary ---*/
 
 .btn-primary {
-    background-color: #428bca;
-    border-color: #3b7cb4;
+    background-color: #009688;
+    border-color: #009688;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active {
-    background-color: #3a95e4;
-    border-color: #3b7cb4;
+    background-color: #009688;
+    border-color: #009688;
 }
 .btn-primary.btn-transparent {
     color: rgb(66, 193, 202);
-    background-color: rgba(66, 193, 202, 0.2);
-    border-color: rgba(66, 193, 202, 0.3);
+    background-color: rgba(0, 150, 136, 0.2);
+    border-color: rgba(0, 150, 136, 0.3);
 }
 .btn-primary.btn-transparent:hover,
 .btn-primary.btn-transparent:focus,
 .btn-primary.btn-transparent:active {
     color: rgb(66, 193, 202);
-    background-color: rgba(66, 193, 202, 0.2);
-    border-color: rgba(66, 193, 202, 0.3);
+    background-color: rgba(1, 79, 72, 0.2);
+    border-color: rgba(1, 79, 72, 0.3);
 }
 .btn-primary.btn-outline {
     color: #428bca;
@@ -1982,7 +1982,7 @@ i.fa-dot-circle-o {
 .btn-primary.btn-outline:focus,
 .btn-primary.btn-outline:active {
     color: #fff;
-    background-color: #428bca;
+    background-color: #014f48;
 }
 /*--- Buttons success ---*/
 

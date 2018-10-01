@@ -1,14 +1,14 @@
-var app = angular.module("lgApp", ["ngRoute"]);
+var app = angular.module("crmApp", ["ngRoute","ngMessages"]);
 app.config(function($routeProvider) {
     $routeProvider
     .when("/", {
-        templateUrl : "admin/views/user/login.html",
-        controller: "userLoginController",
-        controllerAs: "ulc",
+        templateUrl : "views/dashboard.html",
+        controller: "dashboardController",
+        controllerAs: "dbc",
         cache: false
     })
     .when("/newcust", {
-        templateUrl : "admin/views/customer/new_customer.html",
+        templateUrl : "views/customer/new_customer.html",
         controller: "newCustController",
         controllerAs: "ncc",
         cache: false

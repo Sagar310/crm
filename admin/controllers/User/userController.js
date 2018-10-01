@@ -23,6 +23,7 @@ app.controller("userLoginController",function($scope,$http,dataService){
             ulc.operation.complete = true;
             ulc.operation.error = data.error;
             ulc.operation.msg = data.msg;
+           
             if(!data.error)
             {
                 document.location.href = "admin/";
