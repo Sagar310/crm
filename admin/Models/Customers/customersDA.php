@@ -83,11 +83,11 @@
         $wedAniv = fetchData($request,"wedAniv");
         $disPic = fetchData($request,"disPic");
         $createdBy = fetchData($request,"createdBy");
-        $modifiedBy = fetchData($request,"modifiedBy");
+        //$modifiedBy = fetchData($request,"modifiedBy");
         
         if($lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $wedAniv  == NULL || $disPic  == NULL || $createdBy  == NULL || $modifiedBy  == NULL)
         {
-            RANS();
+            $msg = RANS();
         }
         else
         {

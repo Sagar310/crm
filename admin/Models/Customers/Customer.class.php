@@ -77,7 +77,7 @@
         public function newCustomer()
         {
             $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,disPic,createdBy,modifiedBy,birthDate,wedAniv) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',TO_DATE('%s','DD/MM/YYYY'),TO_DATE('%s','DD/MM/YYYY'))",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->disPic,$this->createdBy,$this->modifiedBy,$this->birthDate,$this->wedAniv);            
-            //return $query;
+            return $query;
             try
             {
                 $config = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
