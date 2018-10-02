@@ -55,7 +55,7 @@
                                                 <div class="col-sm-5 col-sm-offset-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Cell Phone no.</label><br>
-                                                            <input type="text" name="cellNo" ng-model="ncc.newcust.cellNO" required pattern="^[6-9]\d{9}$" placeholder="Enter cell phone no." class="form-control">                                            
+                                                            <input type="text" name="cellNo" ng-model="ncc.newcust.cellNo" required pattern="^[6-9]\d{9}$" placeholder="Enter cell phone no." class="form-control">                                            
                                                             <div ng-messages="newCustForm.cellNo.$touched && newCustForm.cellNo.$error" style="color:maroon; text-transform: uppercase;" role="alert">
                                                                 <div ng-message="required"><small>Cell phone no. is mandatory.</small></div>                                                           
                                                                 <div ng-message="pattern"><small>Cell phone no. is invalid.</small></div>      
@@ -81,7 +81,7 @@
                                                         <div class="form-group">
                                                             <label class="control-label">Date of Birth</label><br>
                                                             <div class="input-group">
-                                                                <input type="text" name="birthdate" id="birthdate" ng-model="ncc.newcust.dob" required placeholder="Date of Birth" class="form-control dpic">                                            
+                                                                <input type="text" name="birthdate" id="birthdate" ng-model="ncc.newcust.birthDate" required placeholder="Date of Birth" class="form-control dpic">                                            
                                                                 <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
                                                             </div>
                                                             <div ng-messages="newCustForm.birthdate.$touched && newCustForm.birthdate.$error" style="color:maroon; text-transform: uppercase;" role="alert">
@@ -127,6 +127,18 @@
                                         </div>                                        
                                     </div>
                                 </div>
+                                <div clas="row">
+                                    <div col="col-sm-12" ng-show="ncc.opr.complete && ! ncc.opr.error">
+                                        <div class="alert alert-success">
+                                            <strong>{{ncc.opr.msg}}</strong>
+                                          </div>
+                                    </div>
+                                    <div col="col-sm-12" ng-show="ncc.opr.complete && ncc.opr.error">
+                                        <div class="alert alert-danger">
+                                            <strong>{{ncc.opr.msg}}</strong>
+                                          </div>
+                                    </div>                                    
+                                </div>
                             </form>
                         </div>
                         <div class="panel-footer">
@@ -134,7 +146,7 @@
                                 <div class="col-sm-12">
                                         <div class="row">
                                             <div class="col-sm-2 col-sm-offset-10">
-                                                 <button class="btn btn-primary">Save</button>&nbsp;&nbsp;&nbsp;
+                                                 <button class="btn btn-primary" ng-click="ncc.newCustomer();" ng-show="newCustForm">Save</button>&nbsp;&nbsp;&nbsp;
                                                  <a href="#/custlist" class="btn btn-default">Close</a>
                                             </div>
                                         </div>
