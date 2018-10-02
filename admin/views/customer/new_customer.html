@@ -107,18 +107,24 @@
                                                 </div>
                                                 <div class="col-sm-5 col-sm-offset-2"">
                                                         <div class="form-group">
-                                                            <label class="control-label">Display pic</label><br>
+                                                            <label class="control-label">Display pic </label><br>
                                                             <div class="input-group">
-                                                                <img ng-src="{{dpic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;" ng-click="selectDpic($index);">
+                                                                <img ng-src="assets/images/customers/{{ncc.newcust.disPic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;">
+                                                                <br>
+                                                                <button class="btn btn-info" ng-click="ncc.showSelPicDialog();">...</button>
                                                             </div>                                                          
                                                         </div>
                                                     </div>                                                
                                             </div>                                    
                                         </div>
                                 </div>   
-                                <div class="row">
-                                    <div col="col-m-12">
-                                        
+                                <div class="row" ng-show="ncc.showPicDialog == 1">
+                                    <div col="col-sm-8 xol-sm-offset-2">
+                                        <div class="row" style="height:250px;overflow-y:scroll;">
+                                            <div class="col-lg-2" ng-repeat="dpic in ncc.disPics">
+                                                <img ng-src="assets/images/customers/{{dpic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;" ng-click="ncc.selectDisPic(dpic);">
+                                            </div>
+                                        </div>                                        
                                     </div>
                                 </div>
                             </form>
