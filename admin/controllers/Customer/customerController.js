@@ -1,4 +1,4 @@
-app.controller("newCustController",function($scope,$http,dataService){
+app.controller("newCustController",function($scope,$http,dataService,sessionService){
         
     var ncc = this;
     ncc.newcust = {};
@@ -10,6 +10,7 @@ app.controller("newCustController",function($scope,$http,dataService){
     ncc.newcust.birthDate = "";
     ncc.newcust.wedAniv = "";
     ncc.newcust.disPic = "";
+    ncc.newcust.createdBy = "";
     ncc.newcust.action = "newCustomer";
 
     ncc.opr ={};
@@ -20,6 +21,19 @@ app.controller("newCustController",function($scope,$http,dataService){
     ncc.disPics = [];
 
     ncc.showPicDialog = 0;
+
+    ncc.getCurrentUser = function()
+    {
+        var response = sessionService.getKeyValue("lguser");
+        response.then(function(result){            
+            //console.log(angular.toJson(result))        
+            ncc.newcust.createdBy = result.data.data;
+            
+       },
+       function(result){
+               alert(angular.toJson(result));
+       });           
+    };
 
     ncc.showSelPicDialog =function(){
         ncc.showPicDialog = 1;
@@ -65,7 +79,7 @@ app.controller("newCustController",function($scope,$http,dataService){
     };
 
     ncc.newCustomer = function(){
-        //console.log(ncc.newcust);
+        console.log(ncc.newcust);
         var response = dataService.httpCall(ncc.newcust,"Models/Customers/customersDA.php");
         response.then(function(result){            
             console.log(angular.toJson(result));
@@ -83,8 +97,9 @@ app.controller("newCustController",function($scope,$http,dataService){
     };
 
     ncc.init = function(){
-       ncc.initDatePicker();
-       ncc.getDisPics();
+        ncc.getCurrentUser();
+        ncc.initDatePicker();
+        ncc.getDisPics();
     };
 
     ncc.init();

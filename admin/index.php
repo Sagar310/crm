@@ -738,6 +738,7 @@
       <!--script src="assets/dist/js/dashboard.js" type="text/javascript"></script-->
       <script src="controllers/app.js"></script>
       <script src="controllers/dataService.js"></script>
+      <script src="controllers/sessionService.js"></script>
       <script src="controllers/Customer/customerController.js"></script>
       <!-- End Theme label Script
          =====================================================================-->
