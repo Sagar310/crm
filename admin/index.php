@@ -357,8 +357,8 @@
                      </a>
                      <ul class="treeview-menu">
                         <li><a href="#/newcust">Add Customer</a></li>
-                        <li><a href="clist.html">List</a></li>
-                        <li><a href="group.html">Groups</a></li>
+                        <li><a href="#/customers">List</a></li>
+                        <!--li><a href="group.html">Groups</a></li-->
                      </ul>
                   </li>
                   <li class="treeview">

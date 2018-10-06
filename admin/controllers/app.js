@@ -13,6 +13,12 @@ app.config(function($routeProvider) {
         controllerAs: "ncc",
         cache: false
     })    
+    .when("/customers", {
+        templateUrl : "views/customer/customers.html",
+        controller: "custListController",
+        controllerAs: "clc",
+        cache: false
+    })    
     .otherwise({ redirectTo: '/' });         
 
 });

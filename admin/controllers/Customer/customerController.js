@@ -101,3 +101,35 @@ app.controller("newCustController",function($scope,$http,dataService,sessionServ
 
     ncc.init();
 });
+
+app.controller("custListController",function($scope,$http,dataService){
+
+    var clc = this;
+    clc.custList = [];
+
+    clc.getCustomers = function()
+    {
+        var data ={};
+        data.action="getAllCustomers";
+        var response = dataService.httpCall(data,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+             //console.log(angular.toJson(result));
+
+            clc.custList = angular.fromJson(result.data.data);
+            //console.log(clc.custList);
+            
+
+            
+        },
+        function(result){
+                alert(angular.toJson(result));
+        });         
+    };
+
+    clc.init = function(){
+        clc.getCustomers();
+    };
+
+    clc.init();
+
+});
