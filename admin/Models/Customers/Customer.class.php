@@ -76,8 +76,11 @@
 
         public function newCustomer()
         {
-            $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,disPic,createdBy,modifiedBy,birthDate,wedAniv) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s',TO_DATE('%s','DD/MM/YYYY'),TO_DATE('%s','DD/MM/YYYY'))",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->disPic,$this->createdBy,$this->modifiedBy,$this->birthDate,$this->wedAniv);            
-            return $query;
+            if($this->wedAniv == NULL)
+                $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,birthDate,disPic,createdBy) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->disPic,$this->createdBy);            
+            else
+                $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,birthDate,wedAniv,disPic,createdBy) VALUES ('%s','%s','%s','%s','%s',%s','%s','%s','%s')",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->createdBy);            
+            //return $query;
             try
             {
                 $config = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
@@ -103,7 +106,7 @@
 
         public function saveCustomer()
         {            
-            $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',birthDate=TO_DATE('%s','DD/MM/YYYY'),wedAniv=TO_DATE('%s','DD/MM/YYYY'),disPic='%s',createdBy='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->createdBy,$this->modifiedBy,$this->custid);            
+            $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',STR_TO_DATE('%s','%m/%d/%Y'),STR_TO_DATE('%s','%m/%d/%Y'),disPic='%s',createdBy='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->createdBy,$this->modifiedBy,$this->custid);            
             //return $query;
             try
             {

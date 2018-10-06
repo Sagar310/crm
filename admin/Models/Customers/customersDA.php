@@ -83,9 +83,9 @@
         $wedAniv = fetchData($request,"wedAniv");
         $disPic = fetchData($request,"disPic");
         $createdBy = fetchData($request,"createdBy");
-        //$modifiedBy = fetchData($request,"modifiedBy");
         
-        if($lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $wedAniv  == NULL || $disPic  == NULL || $createdBy  == NULL || $modifiedBy  == NULL)
+        
+        if($lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $createdBy  == NULL )
         {
             $msg = RANS();
         }
@@ -101,7 +101,7 @@
             $obj->wedAniv =  $wedAniv;
             $obj->disPic =  $disPic;
             $obj->createdBy =  $createdBy;
-            $obj->modifiedBy =  $modifiedBy;
+            
             $msg=$obj->newCustomer();
         }
         return $msg;

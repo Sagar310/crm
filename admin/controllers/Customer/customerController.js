@@ -78,23 +78,20 @@ app.controller("newCustController",function($scope,$http,dataService,sessionServ
         });          
     };
 
-    ncc.newCustomer = function(){
-        console.log(ncc.newcust);
+    ncc.newCustomer = function(){        
+        //console.log(ncc.newcust);
         var response = dataService.httpCall(ncc.newcust,"Models/Customers/customersDA.php");
         response.then(function(result){            
             console.log(angular.toJson(result));
             ncc.opr.complete = true;
             ncc.opr.error = result.data.error;
-            ncc.opr.msg = result.data.msg;
-            if(!result.data.error)
-            {
-
-            }        
+            ncc.opr.msg = result.data.msg;      
        },
        function(result){
                alert(angular.toJson(result));
        });          
     };
+
 
     ncc.init = function(){
         ncc.getCurrentUser();
