@@ -8,7 +8,7 @@ app.config(function($routeProvider) {
         cache: false
     })
     .when("/newcust", {
-        templateUrl : "views/customer/new_customer.html",
+        templateUrl : "views/customer/newCustomer.html",
         controller: "newCustController",
         controllerAs: "ncc",
         cache: false
@@ -18,7 +18,13 @@ app.config(function($routeProvider) {
         controller: "custListController",
         controllerAs: "clc",
         cache: false
-    })    
+    })   
+    .when("/updateCustomer/:custid", {
+        templateUrl : "views/customer/updateCustomer.html",
+        controller: "updateCustController",
+        controllerAs: "ucc",
+        cache: false
+    }) 
     .otherwise({ redirectTo: '/' });         
 
 });

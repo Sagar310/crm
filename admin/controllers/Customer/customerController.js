@@ -40,8 +40,7 @@ app.controller("newCustController",function($scope,$http,dataService,sessionServ
     }
 
     ncc.selectDisPic = function(pic)
-    {
-        
+    {        
         ncc.newcust.disPic = pic;
         ncc.showPicDialog = 0;
     };
@@ -102,7 +101,7 @@ app.controller("newCustController",function($scope,$http,dataService,sessionServ
     ncc.init();
 });
 
-app.controller("custListController",function($scope,$http,dataService){
+app.controller("custListController",function($http,dataService){
 
     var clc = this;
     clc.custList = [];
@@ -132,4 +131,123 @@ app.controller("custListController",function($scope,$http,dataService){
 
     clc.init();
 
+});
+
+app.controller("updateCustController",function($http,$routeParams,dataService,sessionService){
+
+    var ucc = this;
+    ucc.customer2Fetch = {};
+    ucc.customer2Fetch.custid = $routeParams.custid;
+    ucc.customer2Fetch.action = "getCustomerById";
+
+    ucc.customer2Update = {};
+    ucc.disPic =[];
+    ucc.showPicDialog = 0;
+    ucc.opr = {};
+    ucc.opr.complete = false;
+    ucc.opr.error = false;
+    ucc.opr.msg = "";
+
+    ucc.getCustomer = function(){
+        var response = dataService.httpCall(ucc.customer2Fetch,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+             //console.log(angular.toJson(result));
+
+            if(!result.data.error){
+                //console.log(ucc.customer2Fetch);
+                ucc.customer2Fetch = angular.fromJson(result.data.data)[0];                
+                ucc.customer2Update = angular.copy(ucc.customer2Fetch);                
+            }
+             
+            
+            
+
+            
+        },
+        function(result){
+                alert(angular.toJson(result));
+        });         
+    };
+
+    ucc.getDisPics = function(){
+        var data = {};
+        data.action="getDisplayPic";
+        var response = dataService.httpCall(data,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+             //console.log(angular.toJson(result));
+            ucc.disPics = angular.fromJson(result.data);
+            //console.log(ncc.disPic);
+        },
+        function(result){
+            alert(angular.toJson(result));
+        });          
+    };    
+
+    ucc.showSelPicDialog =function(){
+        ucc.showPicDialog = 1;
+    }
+
+    ucc.selectDisPic = function(pic)
+    {        
+        ucc.customer2Update.disPic = pic;
+        ucc.showPicDialog = 0;
+    };
+
+    ucc.initDatePicker = function(){
+        var date_input1=$('.dpic'); //our date input has the name "date"
+        var container1=$('#newcustForm').length>0 ? $('#newcustForm').parent() : "body";
+        date_input1.datepicker({
+            format: 'dd/mm/yyyy',
+            container: container1,
+            todayHighlight: true,
+            autoclose: true,
+        });         
+    };
+
+    ucc.dataChanged = function(){
+
+        var changed = false;
+        if(ucc.customer2Fetch.lastName != ucc.customer2Update.lastName)
+        {
+            changed = true;
+        }
+        if(ucc.customer2Fetch.firstName != ucc.customer2Update.firstName)
+        {
+            changed = true;
+        }  
+        if(ucc.customer2Fetch.gender != ucc.customer2Update.gender)
+        {
+            changed = true;
+        } 
+        if(ucc.customer2Fetch.cellNo != ucc.customer2Update.cellNo)
+        {
+            changed = true;
+        }      
+        if(ucc.customer2Fetch.email != ucc.customer2Update.email)
+        {
+            changed = true;
+        } 
+        if(ucc.customer2Fetch.birthDate != ucc.customer2Update.birthDate)
+        {
+            changed = true;
+        }  
+        if(ucc.customer2Fetch.wedAniv != ucc.customer2Update.wedAniv)
+        {
+            changed = true;
+        }      
+        if(ucc.customer2Fetch.disPic != ucc.customer2Update.disPic)
+        {
+            changed = true;
+        }
+        return changed;                                                    
+
+    };
+
+    ucc.init = function(){
+        ucc.getCustomer();
+        ucc.getDisPics();
+        ucc.initDatePicker();
+    };
+
+    ucc.init();
 });
