@@ -118,13 +118,12 @@
         $email = fetchData($request,"email");
         $birthDate = fetchData($request,"birthDate");
         $wedAniv = fetchData($request,"wedAniv");
-        $disPic = fetchData($request,"disPic");
-        $createdBy = fetchData($request,"createdBy");
+        $disPic = fetchData($request,"disPic");        
         $modifiedBy = fetchData($request,"modifiedBy");
         
-        if($custid == NULL || $lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $wedAniv  == NULL || $disPic  == NULL || $createdBy  == NULL || $modifiedBy  == NULL)
+        if($custid == NULL || $lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $modifiedBy  == NULL)
         {
-            RANS();
+            $msg = RANS();
         }
         else
         {
@@ -137,8 +136,7 @@
             $obj->email =  $email;
             $obj->birthDate =  $birthDate;
             $obj->wedAniv =  $wedAniv;
-            $obj->disPic =  $disPic;
-            $obj->createdBy =  $createdBy;
+            $obj->disPic =  $disPic;            
             $obj->modifiedBy =  $modifiedBy;
             $msg=$obj->saveCustomer();
         }

@@ -156,7 +156,8 @@ app.controller("updateCustController",function($http,$routeParams,dataService,se
             if(!result.data.error){
                 //console.log(ucc.customer2Fetch);
                 ucc.customer2Fetch = angular.fromJson(result.data.data)[0];                
-                ucc.customer2Update = angular.copy(ucc.customer2Fetch);                
+                ucc.customer2Update = angular.copy(ucc.customer2Fetch);           
+                ucc.getCurrentUser();     
             }
              
             
@@ -167,6 +168,22 @@ app.controller("updateCustController",function($http,$routeParams,dataService,se
         function(result){
                 alert(angular.toJson(result));
         });         
+    };
+
+    ucc.getCurrentUser = function()
+    {
+        var response = sessionService.getKeyValue("lguser");
+        response.then(function(result){            
+            //console.log(angular.toJson(result))        
+            ucc.customer2Update.modifiedBy = result.data.data;
+            //console.log(ucc.customer2Update.modifiedBy);
+            //alert(angular.toJson(ucc.customer2Update));
+            
+            
+       },
+       function(result){
+               alert(angular.toJson(result));
+       });           
     };
 
     ucc.getDisPics = function(){
@@ -243,8 +260,27 @@ app.controller("updateCustController",function($http,$routeParams,dataService,se
 
     };
 
+    ucc.saveCustomer = function(){
+
+        ucc.customer2Update.action = "saveCustomer";
+        //alert(angular.toJson(ucc.customer2Update));
+        
+        var response = dataService.httpCall(ucc.customer2Update,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+            console.log(angular.toJson(result));
+            ucc.opr.complete = true;
+            ucc.opr.error = result.data.error;
+            ucc.opr.msg = result.data.msg;
+                   
+        },
+        function(result){
+                alert(angular.toJson(result));
+        });         
+    
+    }
+
     ucc.init = function(){
-        ucc.getCustomer();
+        ucc.getCustomer();        
         ucc.getDisPics();
         ucc.initDatePicker();
     };

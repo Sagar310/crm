@@ -106,7 +106,10 @@
 
         public function saveCustomer()
         {            
-            $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',STR_TO_DATE('%s','%m/%d/%Y'),STR_TO_DATE('%s','%m/%d/%Y'),disPic='%s',createdBy='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->createdBy,$this->modifiedBy,$this->custid);            
+            if($this->wedAniv == NULL)
+                $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',birthDate='%s',disPic='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->disPic,$this->modifiedBy,$this->custid);            
+            else
+                $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',birthDate='%s',wedAniv = '%s',disPic='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->modifiedBy,$this->custid);            
             //return $query;
             try
             {
