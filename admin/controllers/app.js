@@ -25,6 +25,12 @@ app.config(function($routeProvider) {
         controllerAs: "ucc",
         cache: false
     }) 
+    .when("/deleteCustomer/:custid",{
+        templateUrl: "views/customer/deleteCustomer.html",
+        controller: "deleteCustController",
+        controllerAs : "dcc",
+        cache: false
+    })
     .otherwise({ redirectTo: '/' });         
 
 });

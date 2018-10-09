@@ -120,7 +120,6 @@
         $wedAniv = fetchData($request,"wedAniv");
         $disPic = fetchData($request,"disPic");        
         $modifiedBy = fetchData($request,"modifiedBy");
-        
         if($custid == NULL || $lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $modifiedBy  == NULL)
         {
             $msg = RANS();

@@ -263,7 +263,7 @@ app.controller("updateCustController",function($http,$routeParams,dataService,se
     ucc.saveCustomer = function(){
 
         ucc.customer2Update.action = "saveCustomer";
-        //alert(angular.toJson(ucc.customer2Update));
+        alert(angular.toJson(ucc.customer2Update));
         
         var response = dataService.httpCall(ucc.customer2Update,"Models/Customers/customersDA.php");
         response.then(function(result){            
@@ -286,4 +286,57 @@ app.controller("updateCustController",function($http,$routeParams,dataService,se
     };
 
     ucc.init();
+});
+
+app.controller("deleteCustController",function($routeParams,dataService,sessionService){
+
+    var dcc = this;
+    dcc.customer2Delete = {};
+    dcc.customer2Delete.custid = $routeParams.custid;
+    dcc.customer2Delete.action = "getCustomerById"
+
+    dcc.opr = {};
+    dcc.opr.complete = false;
+    dcc.opr.error = false;
+    dcc.opr.msg = "";
+
+    dcc.getCustomer = function(){
+        var response = dataService.httpCall(dcc.customer2Delete,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+             //console.log(angular.toJson(result));
+
+            if(!result.data.error){
+                //console.log(ucc.customer2Fetch);
+                dcc.customer2Delete = angular.fromJson(result.data.data)[0];                
+                       
+                //dcc.getCurrentUser();     
+            }                                     
+        },
+        function(result){
+                alert(angular.toJson(result));
+        });         
+    };
+
+    dcc.deleteCustomer = function(){
+        dcc.customer2Delete.action="deleteCustomer";
+        var response = dataService.httpCall(dcc.customer2Delete,"Models/Customers/customersDA.php");
+        response.then(function(result){            
+            console.log(angular.toJson(result));
+            dcc.opr.complete = true;
+            dcc.opr.error = result.data.error;
+            dcc.opr.msg = result.data.msg;
+                                  
+        },
+        function(result){
+                alert(angular.toJson(result));
+        });          
+    }
+
+    
+    dcc.init = function(){
+        dcc.getCustomer();
+    };
+
+    dcc.init();
+    
 });

@@ -76,10 +76,9 @@
 
         public function newCustomer()
         {
-            if($this->wedAniv == NULL)
-                $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,birthDate,disPic,createdBy) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s')",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->disPic,$this->createdBy);            
-            else
-                $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,birthDate,wedAniv,disPic,createdBy) VALUES ('%s','%s','%s','%s','%s',%s','%s','%s','%s')",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->createdBy);            
+            
+            $query = sprintf("INSERT INTO %s (lastName,firstName,gender,cellNo,email,birthDate,wedAniv,disPic,createdBy) VALUES ('%s','%s','%s','%s','%s','%s','%s','%s','%s')",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->createdBy);            
+
             //return $query;
             try
             {
@@ -106,10 +105,8 @@
 
         public function saveCustomer()
         {            
-            if($this->wedAniv == NULL)
-                $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',birthDate='%s',disPic='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->disPic,$this->modifiedBy,$this->custid);            
-            else
-                $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',birthDate='%s',wedAniv = '%s',disPic='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->modifiedBy,$this->custid);            
+            $query = sprintf("UPDATE %s SET lastName='%s',firstName='%s',gender='%s',cellNo='%s',email='%s',birthDate='%s',wedAniv='%s',disPic='%s',modifiedBy='%s' WHERE custid = '%s'",$this->table,$this->lastName,$this->firstName,$this->gender,$this->cellNo,$this->email,$this->birthDate,$this->wedAniv,$this->disPic,$this->modifiedBy,$this->custid);            
+                            
             //return $query;
             try
             {
