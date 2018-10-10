@@ -363,6 +363,19 @@
                   </li>
                   <li class="treeview">
                      <a href="#">
+                     <i class="fa fa-anchor"></i><span>Raw materials</span>
+                     <span class="pull-right-container">
+                     <i class="fa fa-angle-left pull-right"></i>
+                     </span>
+                     </a>
+                     <ul class="treeview-menu">
+                        <li><a href="#/newRawMaterial">Add Raw material</a></li>
+                        <li><a href="#/customers">List</a></li>
+                        <!--li><a href="group.html">Groups</a></li-->
+                     </ul>
+                  </li>                  
+                  <li class="treeview">
+                     <a href="#">
                      <i class="fa fa-shopping-basket"></i><span>Transaction</span>
                      <span class="pull-right-container">
                      <i class="fa fa-angle-left pull-right"></i>
@@ -740,6 +753,7 @@
       <script src="controllers/dataService.js"></script>
       <script src="controllers/sessionService.js"></script>
       <script src="controllers/Customer/customerController.js"></script>
+      <script src="controllers/RawMaterial/rawMaterialController"></script>
       <!-- End Theme label Script
          =====================================================================-->
         

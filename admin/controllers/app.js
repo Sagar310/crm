@@ -31,6 +31,12 @@ app.config(function($routeProvider) {
         controllerAs : "dcc",
         cache: false
     })
+    .when("/newRawMaterial",{
+        templateUrl: "views/rawmaterial/newRawMaterial.html",
+        controller: "newRMController",
+        controllerAs : "nrmc",
+        cache: false
+    })
     .otherwise({ redirectTo: '/' });         
 
 });
