@@ -32,7 +32,7 @@ function __autoload($class_name)
         public function processAction()
         {
             $msg="";   
-            switch($action)
+            switch($this->action)
             {
                     case "newKey":
                         $msg=$this->newKey();
@@ -56,8 +56,8 @@ function __autoload($class_name)
         public function newKey()
         {
             $msg = "";
-            $key = fetchData("key");
-            $val = fetchData("val");
+            $key = $this->fetchData("key");
+            $val = $this->fetchData("val");
             if($key == NULL || $val == NULL)
             {
                 $msg = RANS();
@@ -73,7 +73,7 @@ function __autoload($class_name)
         public function getKeyValue()
         {
             $msg = "";
-            $key = fetchData("key");
+            $key = $this->fetchData("key");
             if($key == NULL)
             {
                 $msg = RANS();
@@ -89,8 +89,8 @@ function __autoload($class_name)
         public function updateKey()
         {
             $msg = "";
-            $key = fetchData("key");
-            $val = fetchData("val");
+            $key = $this->fetchData("key");
+            $val = $this->fetchData("val");
             if($key == NULL || $val == NULL)
             {
                 $msg = RANS();
@@ -106,7 +106,7 @@ function __autoload($class_name)
         public function destroyKey()
         {
             $msg = "";
-            $key = fetchData("key");
+            $key = $this->fetchData("key");
             if($key == NULL)
             {
                 $msg = RANS();
@@ -120,6 +120,8 @@ function __autoload($class_name)
         }
     
     }
-   
+    $obj = new SessionDAO();
+    $msg = $obj->processAction();
+    echo $msg;   
     
   
