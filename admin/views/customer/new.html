@@ -3,8 +3,8 @@
            <i class="fa fa-users"></i>
         </div>
         <div class="header-title">
-           <h1>New Customer</h1>
-           <small><a href="#/">Dashboard</a> | Update Customer</small>
+           <h1>Customers</h1>
+           <small><a href="#/">Dashboard</a> | New Customer</small>
         </div>
 </section>
 <section class="content">
@@ -12,18 +12,18 @@
            <!-- Form controls -->
            <div class="col-sm-12">
                 <div class="panel panel-primary">
-                        <div class="panel-heading">Update Customer</div>
+                        <div class="panel-heading">New Customer</div>
                         <div class="panel-body">
-                            <form name="updCustForm" id="updCustForm">
+                            <form name="newCustForm" id="newCustForm">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="row">
                                             <div class="col-sm-5">
                                                 <div class="form-group">
-                                                    <label class="control-label">Last name {{ucc.cutomer2Update.lastName}}</label><br>
-                                                    <input type="text" name="lastName" ng-model="ucc.customer2Update.lastName" required placeholder="Enter Last name" class="form-control">                                            
+                                                    <label class="control-label">Last name</label><br>
+                                                    <input type="text" name="lastName" ng-model="ncc.newcust.lastName" required placeholder="Enter Last name" class="form-control">                                            
                                                     <br>                                                    
-                                                    <div ng-messages="updCustForm.lastName.$touched && updCustForm.lastName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                    <div ng-messages="newCustForm.lastName.$touched && newCustForm.lastName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
                                                         <div ng-message="required"><small>Last name is mandatory.</small></div>                                                           
                                                     </div>                                                    
                                                 </div>
@@ -31,8 +31,8 @@
                                             <div class="col-sm-5 col-sm-offset-2">
                                                     <div class="form-group">
                                                         <label class="control-label">First name</label><br>
-                                                        <input type="text" name="firstName" ng-model="ucc.customer2Update.firstName" required placeholder="Enter First name" class="form-control">                                            
-                                                        <div ng-messages="updCustForm.firstName.$touched && updCustForm.firstName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                        <input type="text" name="firstName" ng-model="ncc.newcust.firstName" required placeholder="Enter First name" class="form-control">                                            
+                                                        <div ng-messages="newCustForm.firstName.$touched && newCustForm.firstName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
                                                             <div ng-message="required"><small>Last name is mandatory.</small></div>                                                           
                                                         </div>                                                         
                                                     </div>
@@ -46,7 +46,7 @@
                                                 <div class="col-sm-5">
                                                     <div class="form-group">
                                                         <label class="control-label">Gender</label><br>
-                                                        <select ng-model="ucc.customer2Update.gender">
+                                                        <select ng-model="ncc.newcust.gender">
                                                             <option value="NULL">Select gender</option>
                                                             <option value="F">Female</option>
                                                             <option value="M">Male</option>
@@ -56,8 +56,8 @@
                                                 <div class="col-sm-5 col-sm-offset-2">
                                                         <div class="form-group">
                                                             <label class="control-label">Cell Phone no.</label><br>
-                                                            <input type="text" name="cellNo" ng-model="ucc.customer2Update.cellNo" required pattern="^[6-9]\d{9}$" placeholder="Enter cell phone no." class="form-control">                                            
-                                                            <div ng-messages="updCustForm.cellNo.$touched && updCustForm.cellNo.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                            <input type="text" name="cellNo" ng-model="ncc.newcust.cellNo" required pattern="^[6-9]\d{9}$" placeholder="Enter cell phone no." class="form-control">                                            
+                                                            <div ng-messages="newCustForm.cellNo.$touched && newCustForm.cellNo.$error" style="color:maroon; text-transform: uppercase;" role="alert">
                                                                 <div ng-message="required"><small>Cell phone no. is mandatory.</small></div>                                                           
                                                                 <div ng-message="pattern"><small>Cell phone no. is invalid.</small></div>      
                                                             </div>                                                             
@@ -72,23 +72,23 @@
                                                 <div class="col-sm-5">
                                                     <div class="form-group">
                                                         <label class="control-label">Email</label><br>
-                                                        <input type="text" name="email" ng-model="ucc.customer2Update.email" required placeholder="Enter email address." class="form-control">                                            
-                                                        <div ng-messages="updCustForm.email.$touched && updCustForm.email.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                        <input type="text" name="email" ng-model="ncc.newcust.email" required placeholder="Enter email address." class="form-control">                                            
+                                                        <div ng-messages="newCustForm.email.$touched && newCustForm.email.$error" style="color:maroon; text-transform: uppercase;" role="alert">
                                                             <div ng-message="required"><small>Email address is mandatory.</small></div>                                                           
                                                         </div>                                                           
                                                     </div>
                                                 </div>
                                                 <div class="col-sm-5 col-sm-offset-2">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Date of Birth</label><br>
-                                                        <div class="input-group">
-                                                            <input type="text" name="birthdate" id="birthdate" ng-model="ucc.customer2Update.birthDate" required placeholder="Date of Birth" class="form-control dpic">                                            
-                                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Date of Birth</label><br>
+                                                            <div class="input-group">
+                                                                <input type="text" name="birthdate" id="birthdate" ng-model="ncc.newcust.birthDate" required placeholder="Date of Birth" class="form-control dpic">                                            
+                                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                            <div ng-messages="newCustForm.birthdate.$touched && newCustForm.birthdate.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                                <div ng-message="required"><small>Date of birth is mandatory.</small></div>                                                           
+                                                            </div>                                                             
                                                         </div>
-                                                        <div ng-messages="updCustForm.birthdate.$touched && updCustForm.birthdate.$error" style="color:maroon; text-transform: uppercase;" role="alert">
-                                                            <div ng-message="required"><small>Date of birth is mandatory.</small></div>                                                           
-                                                        </div>                                                             
-                                                    </div>
                                                 </div>
                                             </div>                                    
                                         </div>
@@ -97,45 +97,46 @@
                                         <div class="col-sm-12">
                                             <div class="row">
                                                 <div class="col-sm-5">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Wedding Anniversary</label><br>
-                                                        <div class="input-group">
-                                                            <input type="text" name="wedAnniv" id="wedAnniv" ng-model="ucc.customer2Update.wedAniv"  placeholder="Wedding Anniversary" class="form-control dpic">                                            
-                                                            <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
-                                                        </div>                                                         
-                                                    </div>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Wedding Anniversary</label><br>
+                                                            <div class="input-group">
+                                                                <input type="text" name="wedAnniv" id="wedAnniv" ng-model="ncc.newcust.wedAniv"  placeholder="Wedding Anniversary" class="form-control dpic">                                            
+                                                                <div class="input-group-addon"><i class="fa fa-calendar"></i></div>
+                                                            </div>
+                                                         
+                                                        </div>
                                                 </div>
                                                 <div class="col-sm-5 col-sm-offset-2"">
-                                                    <div class="form-group">
-                                                        <label class="control-label">Display pic </label><br>
+                                                        <div class="form-group">
+                                                            <label class="control-label">Display pic </label><br>
                                                             <div class="input-group">
-                                                                <img ng-src="assets/images/customers/{{ucc.customer2Update.disPic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;">
+                                                                <img ng-src="assets/images/customers/{{ncc.newcust.disPic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;">
                                                                 <br>
-                                                                <button class="btn btn-info" ng-click="ucc.showSelPicDialog();">...</button>
+                                                                <button class="btn btn-info" ng-click="ncc.showSelPicDialog();">...</button>
                                                             </div>                                                          
-                                                    </div>
-                                                </div>                                                
+                                                        </div>
+                                                    </div>                                                
                                             </div>                                    
                                         </div>
-                                </div> 
-                                <div class="row" ng-show="ucc.showPicDialog == 1">
+                                </div>   
+                                <div class="row" ng-show="ncc.showPicDialog == 1">
                                     <div col="col-sm-8 xol-sm-offset-2">
                                         <div class="row" style="height:250px;overflow-y:scroll;">
-                                            <div class="col-lg-2" ng-repeat="dpic in ucc.disPics">
-                                                <img ng-src="assets/images/customers/{{dpic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;" ng-click="ucc.selectDisPic(dpic);">
+                                            <div class="col-lg-2" ng-repeat="dpic in ncc.disPics">
+                                                <img ng-src="assets/images/customers/{{dpic}}" style="border:black solid 1px;margin : 2px 2px;cursor:pointer;" ng-click="ncc.selectDisPic(dpic);">
                                             </div>
                                         </div>                                        
                                     </div>
-                                </div>                              
+                                </div>
                                 <div clas="row">
-                                    <div col="col-sm-12" ng-show="ucc.opr.complete && ! ucc.opr.error">
+                                    <div col="col-sm-12" ng-show="ncc.opr.complete && ! ncc.opr.error">
                                         <div class="alert alert-success">
-                                            <strong>{{ucc.opr.msg}}</strong>
+                                            <strong>{{ncc.opr.msg}}</strong>
                                           </div>
                                     </div>
-                                    <div col="col-sm-12" ng-show="ucc.opr.complete && ucc.opr.error">
+                                    <div col="col-sm-12" ng-show="ncc.opr.complete && ncc.opr.error">
                                         <div class="alert alert-danger">
-                                            <strong>{{ucc.opr.msg}}</strong>
+                                            <strong>{{ncc.opr.msg}}</strong>
                                           </div>
                                     </div>                                    
                                 </div>
@@ -146,7 +147,7 @@
                                 <div class="col-sm-12">
                                         <div class="row">
                                             <div class="col-sm-2 col-sm-offset-10">
-                                                 <button class="btn btn-primary" ng-click="ucc.saveCustomer();" ng-show="updCustForm.$valid && ucc.dataChanged()">Save</button>&nbsp;&nbsp;&nbsp;
+                                                 <button class="btn btn-primary" ng-click="ncc.newCustomer();" ng-show="newCustForm">Save</button>&nbsp;&nbsp;&nbsp;
                                                  <a href="#/customers" class="btn btn-default">Close</a>
                                             </div>
                                         </div>

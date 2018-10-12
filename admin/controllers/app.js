@@ -8,25 +8,25 @@ app.config(function($routeProvider) {
         cache: false
     })
     .when("/newcust", {
-        templateUrl : "views/customer/newCustomer.html",
+        templateUrl : "views/customer/new.html",
         controller: "newCustController",
         controllerAs: "ncc",
         cache: false
     })    
     .when("/customers", {
-        templateUrl : "views/customer/customers.html",
+        templateUrl : "views/customer/list.html",
         controller: "custListController",
         controllerAs: "clc",
         cache: false
     })   
     .when("/updateCustomer/:custid", {
-        templateUrl : "views/customer/updateCustomer.html",
+        templateUrl : "views/customer/update.html",
         controller: "updateCustController",
         controllerAs: "ucc",
         cache: false
     }) 
     .when("/deleteCustomer/:custid",{
-        templateUrl: "views/customer/deleteCustomer.html",
+        templateUrl: "views/customer/delete.html",
         controller: "deleteCustController",
         controllerAs : "dcc",
         cache: false

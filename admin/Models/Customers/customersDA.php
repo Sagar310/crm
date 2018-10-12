@@ -5,180 +5,189 @@
     }
     $request=json_decode(file_get_contents("php://input"),true);
     
-    
-    $action=null;
-    if(isset($request["action"]))
-        $action=$request["action"];
-    $msg="";   
-    
-    switch($action)
-    {
-            case "getAllCustomers":
-                $msg=getAllCustomers();
-                break;
-            case "getCustomerById":
-                $msg=getCustomerById($request);
-                break;
-            case "newCustomer":
-                $msg=newCustomer($request);
-                break;
-            case "saveCustomer":
-                $msg=saveCustomer($request);
-                break;
-            case "deleteCustomer":
-                $msg=deleteCustomer($request);
-                break;
-            case "getDisplayPic":
-                $msg=getDisplayPic();
-                break;                                              
-            default :
-                $msg="Invalid action.";
-                break;                   
-    }
-    
-    echo $msg;
+    class CustomerDAO{
+        private $request;
+        private $action;
 
-    function RANS()
-    {
-        $msgArr["error"]=TRUE;
-        $msgArr["msg"]="Required attribute(s) not set.";
-        return json_encode($msgArr);          
-    }
+        public function __construct(){
+            $this->request = json_decode(file_get_contents("php://input"),true);
+            $this->action = $this->request["action"];
+        }
 
-    function fetchData($request,$var){
-            if(isset($request[$var]))
-                return $request[$var];
+        public function RANS()
+        {
+            $msgArr["error"]=TRUE;
+            $msgArr["msg"]="Required attribute(s) not set.";
+            return json_encode($msgArr);          
+        }
+    
+        public function fetchData($var){
+            if(isset($this->request[$var]))
+                return $this->request[$var];
             else
                 return NULL;   
-    }
-
-    function deleteCustomer($request)
-    {
-        $msg = "";
-        $mmsgArr = array();
-        $custid = fetchData($request,"custid");
-
-        if($custid == NULL)
-        {
-            RANS();          
         }
-        else
+        public function processAction()
         {
-            $obj = new Customer();   
-            $obj->custid = $custid;               
-            $msg = $obj->deleteCustomer();
-        }
-        return $msg;        
-    }
+            $msg = "";
+            switch($this->action)
+            {
+                    case "getAllCustomers":
+                        $msg=$this->getAllCustomers();
+                        break;
+                    case "getCustomerById":
+                        $msg=$this->getCustomerById();
+                        break;
+                    case "newCustomer":
+                        $msg=$this->newCustomer();
+                        break;
+                    case "saveCustomer":
+                        $msg=$this->saveCustomer();
+                        break;
+                    case "deleteCustomer":
+                        $msg=$this->deleteCustomer();
+                        break;
+                    case "getDisplayPic":
+                        $msg=$this->getDisplayPic();
+                        break;                                              
+                    default :
+                        $msg="Invalid action.";
+                        break;                   
+            }   
+            return $msg;         
+        }      
+
+        public function deleteCustomer()
+        {
+            $msg = "";
+            $mmsgArr = array();
+            $custid = fetchData("custid");
     
-    function newCustomer($request)
-    {
-        $msg="";
-        $lastName = fetchData($request,"lastName");
-        $firstName = fetchData($request,"firstName");
-        $gender = fetchData($request,"gender");
-        $cellNo = fetchData($request,"cellNo");
-        $email = fetchData($request,"email");
-        $birthDate = fetchData($request,"birthDate");
-        $wedAniv = fetchData($request,"wedAniv");
-        $disPic = fetchData($request,"disPic");
-        $createdBy = fetchData($request,"createdBy");
-        
-        
-        if($lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $createdBy  == NULL )
-        {
-            $msg = RANS();
+            if($custid == NULL)
+            {
+                RANS();          
+            }
+            else
+            {
+                $obj = new Customer();   
+                $obj->custid = $custid;               
+                $msg = $obj->deleteCustomer();
+            }
+            return $msg;        
         }
-        else
+        
+        public function newCustomer()
         {
-            $obj=new Customer();
-            $obj->lastName =  $lastName;
-            $obj->firstName =  $firstName;
-            $obj->gender =  $gender;
-            $obj->cellNo =  $cellNo;
-            $obj->email =  $email;
-            $obj->birthDate =  $birthDate;
-            $obj->wedAniv =  $wedAniv;
-            $obj->disPic =  $disPic;
-            $obj->createdBy =  $createdBy;
+            $msg="";
+            $lastName = fetchData("lastName");
+            $firstName = fetchData("firstName");
+            $gender = fetchData("gender");
+            $cellNo = fetchData("cellNo");
+            $email = fetchData("email");
+            $birthDate = fetchData("birthDate");
+            $wedAniv = fetchData("wedAniv");
+            $disPic = fetchData("disPic");
+            $createdBy = fetchData("createdBy");
             
-            $msg=$obj->newCustomer();
-        }
-        return $msg;
-    }    
-
-    function saveCustomer($request)
-    {
-        $msg="";
-        $custid = fetchData($request,"custid");
-        $lastName = fetchData($request,"lastName");
-        $firstName = fetchData($request,"firstName");
-        $gender = fetchData($request,"gender");
-        $cellNo = fetchData($request,"cellNo");
-        $email = fetchData($request,"email");
-        $birthDate = fetchData($request,"birthDate");
-        $wedAniv = fetchData($request,"wedAniv");
-        $disPic = fetchData($request,"disPic");        
-        $modifiedBy = fetchData($request,"modifiedBy");
-        if($custid == NULL || $lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $modifiedBy  == NULL)
+            
+            if($lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $createdBy  == NULL )
+            {
+                $msg = RANS();
+            }
+            else
+            {
+                $obj=new Customer();
+                $obj->lastName =  $lastName;
+                $obj->firstName =  $firstName;
+                $obj->gender =  $gender;
+                $obj->cellNo =  $cellNo;
+                $obj->email =  $email;
+                $obj->birthDate =  $birthDate;
+                $obj->wedAniv =  $wedAniv;
+                $obj->disPic =  $disPic;
+                $obj->createdBy =  $createdBy;
+                
+                $msg=$obj->newCustomer();
+            }
+            return $msg;
+        }    
+    
+        public function saveCustomer()
         {
-            $msg = RANS();
+            $msg="";
+            $custid = fetchData("custid");
+            $lastName = fetchData("lastName");
+            $firstName = fetchData("firstName");
+            $gender = fetchData("gender");
+            $cellNo = fetchData("cellNo");
+            $email = fetchData("email");
+            $birthDate = fetchData("birthDate");
+            $wedAniv = fetchData("wedAniv");
+            $disPic = fetchData("disPic");        
+            $modifiedBy = fetchData("modifiedBy");
+            if($custid == NULL || $lastName == NULL || $firstName  == NULL || $gender  == NULL || $cellNo  == NULL || $email  == NULL || $birthDate  == NULL || $disPic  == NULL || $modifiedBy  == NULL)
+            {
+                $msg = RANS();
+            }
+            else
+            {
+                $obj=new Customer();
+                $obj->custid =  $custid;
+                $obj->lastName =  $lastName;
+                $obj->firstName =  $firstName;
+                $obj->gender =  $gender;
+                $obj->cellNo =  $cellNo;
+                $obj->email =  $email;
+                $obj->birthDate =  $birthDate;
+                $obj->wedAniv =  $wedAniv;
+                $obj->disPic =  $disPic;            
+                $obj->modifiedBy =  $modifiedBy;
+                $msg=$obj->saveCustomer();
+            }
+            return $msg;
         }
-        else
+            
+        public function getCustomerById($request)
         {
-            $obj=new Customer();
-            $obj->custid =  $custid;
-            $obj->lastName =  $lastName;
-            $obj->firstName =  $firstName;
-            $obj->gender =  $gender;
-            $obj->cellNo =  $cellNo;
-            $obj->email =  $email;
-            $obj->birthDate =  $birthDate;
-            $obj->wedAniv =  $wedAniv;
-            $obj->disPic =  $disPic;            
-            $obj->modifiedBy =  $modifiedBy;
-            $msg=$obj->saveCustomer();
+            $msg="";
+            $msgArr = array();
+            $custid = fetchData("custid");
+            if($custid==NULL)
+            {
+                RANS();         
+            }
+            else
+            {
+                $obj = new Customer();            
+                $msg = $obj->getCustomer("*","custid=".$custid,"","");
+            }
+            return $msg;
+    
         }
-        return $msg;
-    }
+    
+        public function getAllCustomers()
+        {
+            $obj = new Customer();
+            $msg = $obj->getCustomer("*","","","");
+            return $msg;    
+        }
+    
+        public function getDisplayPic()
+        {
+            $dir = "../../assets/images/customers/";
+            $files = glob($dir."*.{jpg,png}", GLOB_BRACE);
+            for($i=0;$i<count($files);$i++) 
+            {
+                $arr = explode("/",$files[$i]);  
+                $c = count($arr);          
+                $files[$i] = $arr[$c-1];
+            } 
+            $msg = json_encode($files);
+            return $msg;  
+        }
         
-    function getCustomerById($request)
-    {
-        $msg="";
-        $msgArr = array();
-        $custid = fetchData($request,"custid");
-        if($custid==NULL)
-        {
-            RANS();         
-        }
-        else
-        {
-            $obj = new Customer();            
-            $msg = $obj->getCustomer("*","custid=".$custid,"","");
-        }
-        return $msg;
-
-    }
-
-    function getAllCustomers()
-    {
-        $obj = new Customer();
-        $msg = $obj->getCustomer("*","","","");
-        return $msg;    
-    }
-
-    function getDisplayPic()
-    {
-        $dir = "../../assets/images/customers/";
-        $files = glob($dir."*.{jpg,png}", GLOB_BRACE);
-        for($i=0;$i<count($files);$i++) 
-        {
-            $arr = explode("/",$files[$i]);  
-            $c = count($arr);          
-            $files[$i] = $arr[$c-1];
-        } 
-        $msg = json_encode($files);
-        return $msg;  
-    }
-
- 
+    }    
+  
+    $obj = new CustomerDAO();
+    $msg = $obj->processAction();
+    echo $msg;

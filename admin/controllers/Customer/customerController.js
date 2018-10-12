@@ -64,7 +64,7 @@ app.controller("newCustController",function($scope,$http,dataService,sessionServ
         data.action="getDisplayPic";
         var response = dataService.httpCall(data,"Models/Customers/customersDA.php");
         response.then(function(result){            
-             //console.log(angular.toJson(result));
+            //console.log(angular.toJson(result));
 
             ncc.disPics = angular.fromJson(result.data);
             //console.log(ncc.disPic);
