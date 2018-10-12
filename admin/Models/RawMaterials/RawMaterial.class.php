@@ -48,7 +48,7 @@
                 $query.=$order." ";
             if($limit!="")
                 $query.=$limit."";
-            return $query;
+            //return $query;
             try
             {
                 $config = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				
@@ -105,7 +105,7 @@
         public function saveRawMaterial()
         {            
             $query = sprintf("UPDATE %s SET rmaterialName='%s',modifiedBy='%s' WHERE rmaterialId = '%s'",$this->table,$this->rmaterialName,$this->modifiedBy,$this->rmaterialId);                                        
-            return $query;
+            //return $query;
             try
             {
                 $config = array( PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_EMULATE_PREPARES => false);				

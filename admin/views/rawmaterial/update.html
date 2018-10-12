@@ -1,11 +1,11 @@
 <section class="content-header">
-        <div class="header-icon">
-           <i class="fa fa-users"></i>
-        </div>
-        <div class="header-title">
-           <h1>New Customer</h1>
-           <small><a href="#/">Dashboard</a> | New Raw Material</small>
-        </div>
+    <div class="header-icon">
+        <i class="fa fa-anchor"></i>
+     </div>
+     <div class="header-title">
+        <h1>Raw materials</h1>
+        <small><a href="#/">Dashboard</a> | Update Raw Material</small>
+     </div>
 </section>
 <section class="content">
         <div class="row">
@@ -14,28 +14,28 @@
                 <div class="panel panel-primary">
                         <div class="panel-heading">New Raw Material</div>
                         <div class="panel-body">
-                            <form name="newRMForm" id="newRMForm">
+                            <form name="updateRMForm" id="updateRMForm">
                                 <div class="row">
                                     <div class="col-sm-12">
                                         <div class="form-group">
                                             <label class="control-label">Raw material name</label><br>
-                                            <input type="text" name="rmaterialName" ng-model="nrmc.newRM.rmaterialName" required placeholder="Enter raw material name" class="form-control">                                            
+                                            <input type="text" name="rmaterialName" ng-model="urmc.rMaterial2Update.rmaterialName" required placeholder="Enter raw material name" class="form-control">                                            
                                             <br>                                                    
-                                            <div ng-messages="newRMForm.rmaterialName.$touched && newRMForm.rmaterialName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                            <div ng-messages="updateRMForm.rmaterialName.$touched && updateRMForm.rmaterialName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
                                                 <div ng-message="required"><small>Raw material name is mandatory.</small></div>                                                           
                                             </div>                                             
                                         </div>
                                     </div>
                                 </div>
                                 <div clas="row">
-                                        <div col="col-sm-12" ng-show="nrmc.opr.complete && ! nrmc.opr.error">
+                                        <div col="col-sm-12" ng-show="urmc.opr.complete && ! urmc.opr.error">
                                             <div class="alert alert-success">
-                                                <strong>{{nrmc.opr.msg}}</strong>
+                                                <strong>{{urmc.opr.msg}}</strong>
                                               </div>
                                         </div>
-                                        <div col="col-sm-12" ng-show="nrmc.opr.complete && nrmc.opr.error">
+                                        <div col="col-sm-12" ng-show="urmc.opr.complete && urmc.opr.error">
                                             <div class="alert alert-danger">
-                                                <strong>{{nrmc.opr.msg}}</strong>
+                                                <strong>{{urmc.opr.msg}}</strong>
                                               </div>
                                         </div>                                                                                                     
                                 </div>                              
@@ -46,7 +46,7 @@
                                 <div class="col-sm-12">
                                         <div class="row">
                                             <div class="col-sm-6 col-sm-offset-6">
-                                                 <button class="btn btn-primary" ng-click="nrmc.newRawMaterial();" ng-show="newRMForm.$valid">Save</button>&nbsp;&nbsp;&nbsp;
+                                                 <button class="btn btn-primary" ng-click="urmc.saveRawMaterial();" ng-show="updateRMForm.$valid && urmc.dataChanged();">Save</button>&nbsp;&nbsp;&nbsp;
                                                  <a href="#/customers" class="btn btn-default">Close</a>
                                             </div>
                                         </div>

@@ -123,7 +123,7 @@
         public function deleteRawMaterial()
         {
             $msg = "";            
-            $rmaterialId = $this->fetchData($request,"rmaterialId");
+            $rmaterialId = $this->fetchData("rmaterialId");
     
             if($rmaterialId == NULL)
             {

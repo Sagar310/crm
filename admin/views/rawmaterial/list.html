@@ -1,0 +1,55 @@
+<section class="content-header">
+    <div class="header-icon">
+        <i class="fa fa-anchor"></i>
+     </div>
+     <div class="header-title">
+        <h1>Raw materials</h1>
+        <small><a href="#/">Dashboard</a> | Raw materials</small>
+     </div>
+</section>
+<section class="content">
+    <div class="row">
+       <!-- Form controls -->
+       <div class="col-sm-12">
+            <div class="panel panel-primary">
+                    <div class="panel-heading">Raw materials</div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-lg-2 col-lg-offset-5">
+                                <form>
+                                    <div class="input-group">
+                                        <input type="text" ng-model="query" class="form-control">
+                                        <div class="input-group-addon"><i class="fa fa-search"></i></div>
+                                    </div>
+                                    <br><br>                                                                        
+                                </form>                                
+                            </div>
+                        </div>                        
+                        <div class="row">
+                            <div class="col-sm-12">
+                                <table class="table table-bordered table-striped table-hover">
+                                    <thead>
+                                        <tr style="background-color: rgb(217,237,247);">
+                                            <td>Sr. No.</td>
+                                            <td>Raw material name</td>                                     
+                                            <td>Actions</td>          
+                                        </tr>                              
+                                    </thead>    
+                                    <tbody>
+                                        <tr ng-repeat="rm in rmlc.rmaterials | filter:query">
+                                            <td> {{$index + 1}}</td>                                                                                        
+                                            <td>{{rm.rmaterialName}}</td>
+                                            <td><a href="#/updateRawMaterial/{{rm.rmaterialId}}" class="btn btn-primary"><i class="fa fa-pencil-square-o"></i></a>&nbsp;<a href="#/deleteRawMaterial/{{rm.rmaterialId}}" class="btn btn-danger"><i class="fa fa-trash-o"></i></a></td>                                            
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-footer">
+
+                    </div>
+            </div>
+       </div>
+    </div>
+ </section>

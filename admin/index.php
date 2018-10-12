@@ -370,7 +370,7 @@
                      </a>
                      <ul class="treeview-menu">
                         <li><a href="#/newRawMaterial">Add Raw material</a></li>
-                        <li><a href="#/customers">List</a></li>
+                        <li><a href="#/RawMaterials">List</a></li>
                         <!--li><a href="group.html">Groups</a></li-->
                      </ul>
                   </li>                  

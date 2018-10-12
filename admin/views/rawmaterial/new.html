@@ -1,0 +1,59 @@
+<section class="content-header">
+        <div class="header-icon">
+           <i class="fa fa-anchor"></i>
+        </div>
+        <div class="header-title">
+           <h1>New Raw material</h1>
+           <small><a href="#/">Dashboard</a> | New Raw Material</small>
+        </div>
+</section>
+<section class="content">
+        <div class="row">
+           <!-- Form controls -->
+           <div class="col-sm-4 col-sm-offset-4">
+                <div class="panel panel-primary">
+                        <div class="panel-heading">New Raw Material</div>
+                        <div class="panel-body">
+                            <form name="newRMForm" id="newRMForm">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <div class="form-group">
+                                            <label class="control-label">Raw material name</label><br>
+                                            <input type="text" name="rmaterialName" ng-model="nrmc.newRM.rmaterialName" required placeholder="Enter raw material name" class="form-control">                                            
+                                            <br>                                                    
+                                            <div ng-messages="newRMForm.rmaterialName.$touched && newRMForm.rmaterialName.$error" style="color:maroon; text-transform: uppercase;" role="alert">
+                                                <div ng-message="required"><small>Raw material name is mandatory.</small></div>                                                           
+                                            </div>                                             
+                                        </div>
+                                    </div>
+                                </div>
+                                <div clas="row">
+                                        <div col="col-sm-12" ng-show="nrmc.opr.complete && ! nrmc.opr.error">
+                                            <div class="alert alert-success">
+                                                <strong>{{nrmc.opr.msg}}</strong>
+                                              </div>
+                                        </div>
+                                        <div col="col-sm-12" ng-show="nrmc.opr.complete && nrmc.opr.error">
+                                            <div class="alert alert-danger">
+                                                <strong>{{nrmc.opr.msg}}</strong>
+                                              </div>
+                                        </div>                                                                                                     
+                                </div>                              
+                            </form>
+                        </div>
+                        <div class="panel-footer">
+                            <div class="row">
+                                <div class="col-sm-12">
+                                        <div class="row">
+                                            <div class="col-sm-6 col-sm-offset-6">
+                                                 <button class="btn btn-primary" ng-click="nrmc.newRawMaterial();" ng-show="newRMForm.$valid">Save</button>&nbsp;&nbsp;&nbsp;
+                                                 <a href="#/customers" class="btn btn-default">Close</a>
+                                            </div>
+                                        </div>
+                                </div>
+                            </div>
+                        </div>
+                </div>
+           </div>
+        </div>
+     </section>

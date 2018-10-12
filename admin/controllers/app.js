@@ -32,11 +32,29 @@ app.config(function($routeProvider) {
         cache: false
     })
     .when("/newRawMaterial",{
-        templateUrl: "views/rawmaterial/newRawMaterial.html",
+        templateUrl: "views/rawmaterial/new.html",
         controller: "newRMController",
         controllerAs : "nrmc",
         cache: false
     })
+    .when("/RawMaterials",{
+        templateUrl: "views/rawmaterial/list.html",
+        controller: "rmListController",
+        controllerAs : "rmlc",
+        cache: false
+    })   
+    .when("/updateRawMaterial/:rmaterialId",{
+        templateUrl: "views/rawmaterial/update.html",
+        controller: "updateRMController",
+        controllerAs: "urmc",
+        cache: false
+    }) 
+    .when("/deleteRawMaterial/:rmaterialId",{
+        templateUrl: "views/rawmaterial/delete.html",
+        controller: "deleteRMController",
+        controllerAs: "drmc",
+        cache: false
+    })     
     .otherwise({ redirectTo: '/' });         
 
 });
