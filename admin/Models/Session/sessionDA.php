@@ -7,110 +7,119 @@ function __autoload($class_name)
     $request=json_decode(file_get_contents("php://input"),true);
     
     
-    $action=null;
-    if(isset($request["action"]))
-        $action=$request["action"];
-    $msg="";
-   
-    
-    switch($action)
-    {
-            case "newKey":
-                $msg=newKey($request);
-                break;
-            case "getKeyValue":
-                $msg=getKeyValue($request);
-                break;
-            case "updateKey":
-                $msg=updateKey($request);
-                break;
-            case "destroyKey":
-                $msg=destroyKey($request);
-                break;                 
-            default :
-                $msg="Invalid action.";
-                break;                   
-    }
-    
-    echo $msg;
-    function RANS()
-    {
-        $msgArr["error"]=TRUE;
-        $msgArr["msg"]="Required attribute(s) not set.";
-        return json_encode($msgArr);          
-    }
+    class SessionDAO{
+        private $request;
+        private $action;
 
-    function fetchData($request,$var){
-            if(isset($request[$var]))
-                return $request[$var];
+        public function __construct(){
+            $this->request = json_decode(file_get_contents("php://input"),true);
+            $this->action = $this->request["action"];
+        }
+
+        public function RANS()
+        {
+            $msgArr["error"]=TRUE;
+            $msgArr["msg"]="Required attribute(s) not set.";
+            return json_encode($msgArr);          
+        }
+    
+        public function fetchData($var){
+            if(isset($this->request[$var]))
+                return $this->request[$var];
             else
                 return NULL;   
-    }
+        }    
+        public function processAction()
+        {
+            $msg="";   
+            switch($action)
+            {
+                    case "newKey":
+                        $msg=$this->newKey();
+                        break;
+                    case "getKeyValue":
+                        $msg=$this->getKeyValue();
+                        break;
+                    case "updateKey":
+                        $msg=$this->updateKey();
+                        break;
+                    case "destroyKey":
+                        $msg=$this->destroyKey();
+                        break;                 
+                    default :
+                        $msg="Invalid action.";
+                        break;                   
+            }            
+            return $msg;
+        }
 
-    function newKey($request)
-    {
-        $msg = "";
-        $key = fetchData($request,"key");
-        $val = fetchData($request,"val");
-        if($key == NULL || $val == NULL)
+        public function newKey()
         {
-            $msg = RANS();
+            $msg = "";
+            $key = fetchData("key");
+            $val = fetchData("val");
+            if($key == NULL || $val == NULL)
+            {
+                $msg = RANS();
+            }
+            else
+            {
+                $obj = new Session();
+                $msg = $obj->newKey($key,$val);
+            }
+            return $msg;
         }
-        else
+    
+        public function getKeyValue()
         {
-            $obj = new Session();
-            $msg = $obj->newKey($key,$val);
+            $msg = "";
+            $key = fetchData("key");
+            if($key == NULL)
+            {
+                $msg = RANS();
+            }
+            else
+            {
+                $obj = new Session();
+                $msg = $obj->getKeyValue($key);
+            }
+            return $msg;        
         }
-        return $msg;
+    
+        public function updateKey()
+        {
+            $msg = "";
+            $key = fetchData("key");
+            $val = fetchData("val");
+            if($key == NULL || $val == NULL)
+            {
+                $msg = RANS();
+            }
+            else
+            {
+                $obj = new Session();
+                $msg = $obj->updateKey($key,$val);
+            }
+            return $msg;
+        }
+    
+        public function destroyKey()
+        {
+            $msg = "";
+            $key = fetchData("key");
+            if($key == NULL)
+            {
+                $msg = RANS();
+            }
+            else
+            {
+                $obj = new Session();
+                $msg = $obj->destroyKey($key);
+            }
+            return $msg;  
+        }
+    
     }
-
-    function getKeyValue($request)
-    {
-        $msg = "";
-        $key = fetchData($request,"key");
-        if($key == NULL)
-        {
-            $msg = RANS();
-        }
-        else
-        {
-            $obj = new Session();
-            $msg = $obj->getKeyValue($key);
-        }
-        return $msg;        
-    }
-
-    function updateKey($request)
-    {
-        $msg = "";
-        $key = fetchData($request,"key");
-        $val = fetchData($request,"val");
-        if($key == NULL || $val == NULL)
-        {
-            $msg = RANS();
-        }
-        else
-        {
-            $obj = new Session();
-            $msg = $obj->updateKey($key,$val);
-        }
-        return $msg;
-    }
-
-    function destroyKey($request)
-    {
-        $msg = "";
-        $key = fetchData($request,"key");
-        if($key == NULL)
-        {
-            $msg = RANS();
-        }
-        else
-        {
-            $obj = new Session();
-            $msg = $obj->destroyKey($key);
-        }
-        return $msg;  
-    }
-
-?>
+   
+    
+  
